@@ -1,0 +1,933 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/chichung0921/fdeconometrics.git/chap2/">
+      
+      
+        <link rel="prev" href="../chap1/">
+      
+      
+        <link rel="next" href="../chap3/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>2 简单线性回归 - 计量经济学</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/font.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="计量经济学" class="md-header__button md-logo" aria-label="计量经济学" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            计量经济学
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2 简单线性回归
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="计量经济学" class="md-nav__button md-logo" aria-label="计量经济学" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    计量经济学
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1 概率论与数理统计基础
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    2 简单线性回归
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    2 简单线性回归
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 潜在结果框架
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 线性投影和线性回归
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 线性投影和线性回归">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.1 线性投影模型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.2 线性回归模型
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 回归系数的估计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 回归系数的估计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.1 回归系数的期望和方差
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.2 估计量的大样本抽样分布
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 拟合优度
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5 误差方差的估计
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6 置信区间和假设检验
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 多元线性回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 工具变量回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5 面板数据回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6 断点回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="2">2 简单线性回归</h1>
+<h2 id="21">2.1 潜在结果框架</h2>
+<p>&emsp;&emsp;在因果推断中，必须有干预，没有干预就没有因果，这里的干预可以是一项政策、一项措施或者一项活动等. 以二值的干预变量为例，两个值分别对应于积极的行动和被动的行动，分别称为<strong>处理</strong>和<strong>控制</strong>，受到对应干预的个体分别称为<strong>处理组</strong>（Treatment Group）和<strong>控制组</strong>（Control Group）.</p>
+<p><strong>注2.1.1</strong> 潜在结果框架的三要素是：潜在结果、稳定性假设和随机分配.</p>
+<p>&emsp;&emsp;对应于每个干预状态，就有一个\textbf{潜在结果}. 设<span class="arithmatex">\(D_i=1\)</span>为积极干预状态，<span class="arithmatex">\(D_i=0\)</span>为控制干预状态，对应的潜在结果分别为<span class="arithmatex">\(Y_{1i}\)</span>和<span class="arithmatex">\(Y_{0i}\)</span>，观测结果为<span class="arithmatex">\(Y_i\)</span>，则有</p>
+<div class="arithmatex">\[Y_i=Y_{0i}+(Y_{1i}-Y_{0i})D_i=\begin{cases}
+        Y_{1i}, \mbox{如果}D_i=1\\
+        Y_{0i}, \mbox{如果}D_i=0
+    \end{cases}\]</div>
+<p><strong>定义2.1.1</strong> 定义<span class="arithmatex">\(\rho_i=Y_{1i}-Y_{0i}\)</span>为<strong>个体因果效应</strong>. 如果<span class="arithmatex">\(\rho_i\)</span>对所有个体而言相同，则称个体因果效应是<strong>同质</strong>的；如果<span class="arithmatex">\(\rho_i\)</span>随<span class="arithmatex">\(i\)</span>的变化而变化，则称个体因果效应是<strong>异质</strong>的.</p>
+<p>&emsp;&emsp;然而，个体的潜在结果只能观测到其中一个，个体因果效应无法直接计算，因此我们关注的是平均因果效应.</p>
+<p><strong>定义2.1.2</strong> 定义<span class="arithmatex">\(\rho=\mathbb{E}[Y_{1i}-Y_{0i}]=\mathbb{E}[Y_{1i}]-\mathbb{E}[Y_{0i}]\)</span>为<strong>平均因果效应</strong>（Average Treatment Effect, ATE）.</p>
+<p>&emsp;&emsp;相应地，我们可以定义处理组的平均因果效应为<span class="arithmatex">\(\rho_T=\mathbb{E}[Y_{1i}-Y_{0i}|D_i=1]\)</span>，控制组的平均因果效应为<span class="arithmatex">\(\rho_C=\mathbb{E}[Y_{1i}-Y_{0i}|D_i=0]\)</span>. 这样，平均因果效应可以用处理组和控制组平均因果效应的线性加权表示：</p>
+<div class="arithmatex">\[\rho=\mathbb{E}[Y_{1i}-Y_{0i}]=\mathbb{E}[\mathbb{E}[Y_{1i}-Y_{0i}|D_i]]=P\{D_i=1\}\rho_T+(1-P\{D_i=1\})\rho_C\]</div>
+<p>我们可利用样本对三种平均因果效应进行估计，然而在实际观测中，处理组样本的潜在结果<span class="arithmatex">\(Y_{0i}\)</span>和控制组样本的潜在结果<span class="arithmatex">\(Y_{1i}\)</span>无法观测，因此处理组和控制组的平均因果效应无法观测，从而总体平均因果效应无法观测. 此时，我们想到以<span class="arithmatex">\(Y_i\)</span>为被解释变量，<span class="arithmatex">\(D_i\)</span>为解释变量，建立简单的虚拟变量回归模型来识别因果效应参数：</p>
+<div class="arithmatex">\[Y_i=\alpha+\rho_{ols} D_i+e_i\]</div>
+<p>可得<span class="arithmatex">\(\hat{\rho}_{ols}\)</span>的值为（本章中将介绍）</p>
+<div class="arithmatex">\[\hat{\beta}=\frac{\sum_{i=1}^{n}(D_i-\bar{D})(Y_i-\bar{Y})}{\sum_{i=1}^{n}(D_i-\bar{D})^2}\]</div>
+<p>处理组和控制组的样本数可进行如下表示：</p>
+<div class="arithmatex">\[n_T=\sum_{i=1}^{n}D_i,\,n_C=\sum_{i=1}^{n}(1-D_i)\]</div>
+<p>则</p>
+<div class="arithmatex">\[\bar{D}=\frac{1}{n}\sum_{i=1}^{n}D_i=\frac{n_T}{n}\]</div>
+<p>现在对<span class="arithmatex">\(\hat{\rho}_{ols}\)</span>表达式的分子和分母进行重新表示，得</p>
+<div class="arithmatex">\[\sum_{i=1}^{n}(D_i-\bar{D})(Y_i-\bar{Y})=\sum_{i=1}^{n}(D_i-\frac{n_T}{n})Y_i\]</div>
+<div class="arithmatex">\[\sum_{i=1}^{n}(D_i-\bar{D})^2=\sum_{i=1}^{n}(D_i^2-2\frac{n_TD_i}{n}+\frac{n_T^2}{n^2})=n_T-\frac{n_T^2}{n}=\frac{n_Tn_C}{n}\]</div>
+<p>则</p>
+<div class="arithmatex">\[\begin{align*}
+        \hat{\rho}_{ols}&amp;=\frac{\sum_{i=1}^{n}(D_i-\frac{n_T}{n})Y_i}{\frac{n_Tn_C}{n}}\\
+        &amp;=\frac{\sum_{i=1}^n[(n_T+n_C)D_i-n_T]}{n_Tn_C}Y_i\\
+        &amp;=\frac{\sum_{i=1}^{n}[n_CD_i-n_T(1-D_i)]}{n_Tn_C}Y_i\\
+        &amp;=\frac{1}{n_T}\sum_{i=1}^{n}D_iY_i-\frac{1}{n_C}\sum_{i=1}^{n}(1-D_i)Y_i\\
+        &amp;=\bar{Y}_T-\bar{Y}_C
+    \end{align*}\]</div>
+<p>故而在大样本条件下，</p>
+<div class="arithmatex">\[\rho_{ols}=\mathbb{E}[Y_i|D_i=1]-\mathbb{E}[Y_i|D_i=0]\]</div>
+<p>现在，我们得到了对平均因果效应的合理估计方法，上式可由处理组的平均因果效应表示为</p>
+<div class="arithmatex">\[\rho_{ols}=\mathbb{E}[Y_{1i}|D_i=1]-\mathbb{E}[Y_{0i}|D_i=0]=\rho_T+\mathbb{E}[Y_{0i}|D_i=1]-\mathbb{E}[Y_{0i}|D_i=0]\]</div>
+<p>此时，<span class="arithmatex">\(\rho_{ols}\)</span>无法精准反映<span class="arithmatex">\(\rho_T\)</span>，当且仅当施加如下假设时，<span class="arithmatex">\(\rho_{ols}\)</span>才等于<span class="arithmatex">\(\rho_T\)</span>：</p>
+<div class="arithmatex">\[\mathbb{E}[Y_{0i}|D_i=1]=\mathbb{E}[Y_{0i}|D_i=0]\]</div>
+<p>&emsp;&emsp;也可由控制组的平均因果效应表示为</p>
+<div class="arithmatex">\[\rho_{ols}=\mathbb{E}[Y_{1i}|D_i=1]-\mathbb{E}[Y_{0i}|D_i=0]=\rho_C+\mathbb{E}[Y_{1i}|D_i=1]-\mathbb{E}[Y_{1i}|D_i=0]\]</div>
+<p>此时，<span class="arithmatex">\(\rho_{ols}\)</span>无法精准反映<span class="arithmatex">\(\rho_C\)</span>，当且仅当施加如下假设时，<span class="arithmatex">\(\rho_{ols}\)</span>才等于<span class="arithmatex">\(\rho_C\)</span>：</p>
+<div class="arithmatex">\[\mathbb{E}[Y_{1i}|D_i=1]=\mathbb{E}[Y_{1i}|D_i=0]\]</div>
+<p>&emsp;&emsp;同时可由总体平均因果效应表示为</p>
+<div class="arithmatex">\[\begin{align*}
+        \rho_{ols}&amp;=(P\{D_i=1\}+1-P\{D_i=1\})\mathbb{E}[Y_{1i}|D_i=1]-(P\{D_i=1\}+1-P\{D_i=1\})\mathbb{E}[Y_{0i}|D_i=0]\\
+        &amp;=P\{D_i=1\}(\mathbb{E}[Y_{1i}-Y_{0i}|D_i=1])+(1-P\{D_i=1\})\mathbb{E}[Y_{1i}-Y_{0i}|D_i=0]+\\
+        &amp;\quad P\{D_i=1\}(\mathbb{E}[Y_{0i}|D_i=1]-\mathbb{E}[Y_{0i}|D_i=0])+(1-P\{D_i=1\})(\mathbb{E}[Y_{1i}|D_i=1]-\mathbb{E}[Y_{1i}|D_i=0])\\
+        &amp;=\rho+\mathbb{E}[Y_{0i}|D_i=1]-\mathbb{E}[Y_{0i}|D_i=0]+(1-P\{D_i=1\})(\rho_T-\rho_C)
+    \end{align*}\]</div>
+<p>此时我们发现，<span class="arithmatex">\(\rho_{ols}\)</span>无法精准反映<span class="arithmatex">\(\rho\)</span>，当且仅当施加如下假设时，<span class="arithmatex">\(\rho_{ols}\)</span>才等于<span class="arithmatex">\(\rho\)</span>：</p>
+<div class="arithmatex">\[\mathbb{E}[Y_{0i}|D_i=1]=\mathbb{E}[Y_{0i}|D_i=0],\,\rho_T=\rho_C\]</div>
+<p>&emsp;&emsp;这里，我们将<span class="arithmatex">\(\mathbb{E}[Y_{0i}|D_i=1]-\mathbb{E}[Y_{0i}|D_i=0]\)</span>和<span class="arithmatex">\(\mathbb{E}[Y_{1i}|D_i=1]-\mathbb{E}[Y_{1i}|D_i=0]\)</span>称为<strong>选择偏差</strong>. 当同时施加选择偏差为0和两组因果效应无差异的假设时，<span class="arithmatex">\(\rho_{ols}\)</span>才可精准反映总体平均因果效应.</p>
+<p><strong>定理2.1.1</strong> （稳定个体处理值假设，SUTVA）稳定个体处理值假设（简称稳定性假设）有两层含义：</p>
+<p>假设1：不同个体的潜在结果之间不会有交互影响；</p>
+<p>假设2：处理水平对所有个体都是相同的.</p>
+<p>&emsp;&emsp;由上面的推导，我们知道如果需要进行因果推断，必须消除选择偏误. 现已知，实现定理2.1.1中的假设即可消除选择偏误，而若要实现其中假设，必须了解样本的分配机制. <strong>随机分配</strong>恰恰可以实现这样的假设：随机的分配个体进入处理组或控制组，使得无论处理组中的个体，还是控制组中的个体，都来自于同一个总体，从而使得个体的潜在结果独立于<span class="arithmatex">\(D\)</span>，即满足于非混杂性：</p>
+<div class="arithmatex">\[(Y_{1i},Y_{0i}) \perp\!\!\!\!\perp D_i\]</div>
+<p>进而均值独立成立：</p>
+<div class="arithmatex">\[\mathbb{E}[Y_{0i}|D_i=1]=\mathbb{E}[Y_{0i}|D_i=0],\,\mathbb{E}[Y_{1i}|D_i=1]=\mathbb{E}[Y_{1i}|D_i=0]\]</div>
+<p><strong>注2.1.2</strong> 基于随机分配的因果分析就是<strong>随机控制实验</strong>（Randomized Control Trial, RCT），简称随机实验.</p>
+<p>&emsp;&emsp;现在验证<span class="arithmatex">\(\hat{\rho}_{ols}\)</span>是对<span class="arithmatex">\(\rho\)</span>的无偏估计.</p>
+<p>&emsp;&emsp;对<span class="arithmatex">\(Y=Y_0+(Y_1-Y_0)D\)</span>两边取条件期望，得</p>
+<div class="arithmatex">\[\mathbb{E}[Y|D]=\mathbb{E}[Y_0|D]+\mathbb{E}[Y_1-Y_0|D]D=\mathbb{E}[Y_0]+\rho D\]</div>
+<p>设<span class="arithmatex">\(\mathbb{E}[Y_0]=\alpha\)</span>，则有</p>
+<div class="arithmatex">\[\mathbb{E}[Y|D]=\alpha+\rho D\]</div>
+<p>从而</p>
+<div class="arithmatex">\[Y=\alpha+\rho D+e\]</div>
+<p>则<span class="arithmatex">\(\hat{\rho}_{ols}\)</span>是对<span class="arithmatex">\(\rho\)</span>的无偏估计.</p>
+<p>&emsp;&emsp;注意到</p>
+<div class="arithmatex">\[\mathbb{E}[e|D]=\mathbb{E}[Y-\alpha-\rho D|D]=0\]</div>
+<p>因此在随机分配中，零条件均值假设成立.</p>
+<p><strong>注2.1.3</strong> <strong>控制变量</strong>是进入回归只起辅助作用的变量，关注的解释变量被称为<strong>关键变量</strong>.</p>
+<p>&emsp;&emsp;如果在随机分配中，某些变量的特征会使结果具有较大差异，需要将这些变量作为<strong>控制变量</strong>（协变量）引入回归模型中，且需施加<strong>条件独立假设</strong>：</p>
+<div class="arithmatex">\[(Y_{1i},Y_{0i}) \perp\!\!\!\!\perp D_i|W_i\]</div>
+<p>建立的回归模型如下：</p>
+<div class="arithmatex">\[Y=\alpha+\rho D+W^\mathrm{T}\beta+e\]</div>
+<p>此时<span class="arithmatex">\(\hat{\rho}_{ols}\)</span>不再是对<span class="arithmatex">\(\rho\)</span>的无偏估计，而是一致估计（证明略）.</p>
+<p>注意到</p>
+<div class="arithmatex">\[\mathbb{E}[Y|D,W]=\alpha+\rho D+W^\mathrm{T}\beta+\mathbb{E}[e|D,W],\,\mathbb{E}[Y|D]=\alpha+\rho D+W^\mathrm{T}\beta+\mathbb{E}[e|D]\]</div>
+<p>则</p>
+<div class="arithmatex">\[\mathbb{E}[e|D,W]=\mathbb{E}[e|D]\]</div>
+<p>上式称为<strong>条件均值独立假设</strong>.</p>
+<p>&emsp;&emsp;引入控制变量时，常依据<strong>后门准则</strong>：所有的后门路径都可被<span class="arithmatex">\(Z\)</span>阻断，当且仅当每条后门路径满足以下任一条件：</p>
+<p>（1）包含一个中介路径<span class="arithmatex">\(A\rightarrow C\rightarrow B\)</span>，其中中介变量<span class="arithmatex">\(C\in Z\)</span>；</p>
+<p>（2）包含一个共同原因的路径<span class="arithmatex">\(A\leftarrow C\rightarrow B\)</span>，其中混杂因子<span class="arithmatex">\(C\in Z\)</span>；</p>
+<p>（3）包含一个共同结果的路径<span class="arithmatex">\(A\rightarrow C\leftarrow B\)</span>，其中对撞因子<span class="arithmatex">\(C\in Z\)</span>.</p>
+<p>&emsp;&emsp;如果同时存在混杂因子和对撞因子，应选择混杂因子，不选择对撞因子；如果<span class="arithmatex">\(Z\)</span>阻断了后门路径<span class="arithmatex">\(a\)</span>，但它作为对撞因子打开了后门路径<span class="arithmatex">\(b\)</span>，即产生<strong>样本选择偏差</strong>（如下图所示）时，就需要在路径<span class="arithmatex">\(b\)</span>上寻找其它可以阻断路径的因子.</p>
+<figure>
+  <img alt="后门路径" src="../assets/document.svg" width="250" />
+</figure>
+<h2 id="22">2.2 线性投影和线性回归</h2>
+<h3 id="221">2.2.1 线性投影模型</h3>
+<p>&emsp;&emsp;由定理1.3.6可知，条件期望函数<span class="arithmatex">\(m(X)=\mathbb{E}[Y|X]\)</span>是对<span class="arithmatex">\(Y\)</span>的最优预测函数. 在实际的预测问题中，我们常常无法获知条件期望函数<span class="arithmatex">\(m(\cdot)\)</span>的具体函数形式，<span class="arithmatex">\(m(\cdot)\)</span>未必是线性函数.</p>
+<p>&emsp;&emsp;对于一个复杂的模型，可以使用<strong>投影</strong>将原始模型的一些特征或变量投影到较小的子空间中，同时尽量保留原始模型的关键信息.这种情况下<span class="arithmatex">\(Y\)</span>和<span class="arithmatex">\(X\)</span>之间的线性预测函数可以构造无数种，而<strong>线性投影模型</strong>可以从所有线性预测函数中选择最优的预测函数，构建对条件期望函数的近似.</p>
+<p><strong>定义2.2.1</strong> 记<span class="arithmatex">\(\mathscr{P}[Y|X]\)</span>是对<span class="arithmatex">\(\mathbb{E}[Y|X]\)</span>的近似，对于线性预测函数</p>
+<div class="arithmatex">\[\mathscr{P}[Y|X]=X^\mathrm{T}\beta,\]</div>
+<p>当<span class="arithmatex">\(\beta\)</span>取<span class="arithmatex">\(\beta^*=\arg\min\mathbb{E}[(Y-X^\mathrm{T}\beta)^2]\)</span>时，函数为最优线性预测函数，此时<span class="arithmatex">\(\beta^*\)</span>称为<strong>线性投影系数</strong>.</p>
+<p>&emsp;&emsp;注意，<span class="arithmatex">\(\mathscr{P}[Y|X]\)</span>是关于<span class="arithmatex">\(\beta\)</span>的函数，随<span class="arithmatex">\(\beta\)</span>的变化而变化.因为可构造的线性预测函数有无数种，对应的<span class="arithmatex">\(\beta\)</span>不同，预测效果则不同.</p>
+<p><strong>定理2.2.1</strong> 假设<span class="arithmatex">\(\mathbb{E}[Y^2]\)</span>和<span class="arithmatex">\(\mathbb{E}[\Vert X\Vert^2]\)</span>均存在，且<span class="arithmatex">\(\mathbb{E}[XX^\mathrm{T}]\)</span>为正定矩阵，则</p>
+<div class="arithmatex">\[\beta^*=(\mathbb{E}[XX^\mathrm{T}])^{-1}\mathbb{E}[XY].\]</div>
+<p>证明：设<span class="arithmatex">\(S(\beta)=\mathbb{E}[(Y-X^\mathrm{T}\beta)^2]\)</span>，则</p>
+<div class="arithmatex">\[\begin{align*}
+        S(\beta)&amp;=\mathbb{E}[(Y-X^\mathrm{T}\beta)^\mathrm{T}(Y-X^\mathrm{T}\beta)]\\
+        &amp;=\mathbb{E}[(Y^\mathrm{T}-\beta^\mathrm{T}X)(Y-X^\mathrm{T}\beta)]\\
+        &amp;=\mathbb{E}[Y^2]-2\beta^\mathrm{T}\mathbb{E}[XY]+\beta^\mathrm{T}\mathbb{E}[XX^\mathrm{T}]\beta
+    \end{align*}\]</div>
+<p>令</p>
+<div class="arithmatex">\[\frac{\partial S(\beta)}{\partial\beta}=-2\mathbb{E}[XY]+2\mathbb{E}[XX^\mathrm{T}]\beta=0\]</div>
+<p>得到</p>
+<div class="arithmatex">\[\beta^*=(\mathbb{E}[XX^\mathrm{T}])^{-1}\mathbb{E}[XY].\]</div>
+<p>根据定理2.2.1，最优线性预测函数可以进一步表示成</p>
+<div class="arithmatex">\[\mathscr{P}[Y|X]=X^\mathrm{T}(\mathbb{E}[XX^\mathrm{T}])^{-1}\mathbb{E}[XY].\]</div>
+<p>与条件期望误差类似，我们把</p>
+<div class="arithmatex">\[e=Y-\mathscr{P}[Y|X]=Y-X^\mathrm{T}\beta^*\]</div>
+<p>称为<strong>线性投影误差</strong>.</p>
+<p><strong>定理2.2.2</strong> （线性投影误差的性质）</p>
+<p>(1)<span class="arithmatex">\(\mathbb{E}[Xe]=0\)</span>；</p>
+<p>(2)若<span class="arithmatex">\(X\)</span>中存在常数，<span class="arithmatex">\(\mathbb{E}[e]=0\)</span>.</p>
+<p>证明：(1)<span class="arithmatex">\(\mathbb{E}[Xe]=\mathbb{E}[XY]-\mathbb{E}[XX^\mathrm{T}]\beta^*=\mathbb{E}[XY]-\mathbb{E}[XX^\mathrm{T}](\mathbb{E}[XX^\mathrm{T}])^{-1}\mathbb{E}[XY]=0.\)</span></p>
+<p>(2)设<span class="arithmatex">\(X\)</span>中存在常数<span class="arithmatex">\(X_i=m\)</span>，则有<span class="arithmatex">\(\mathbb{E}[me]=0\)</span>，即<span class="arithmatex">\(\mathbb{E}[e]=0\)</span>.</p>
+<p><strong>注2.2.2</strong> <span class="arithmatex">\(\mathbb{E}[Xe]=0\)</span>说明<span class="arithmatex">\(X\)</span>和<span class="arithmatex">\(e\)</span>不相关，但无法说明任意函数<span class="arithmatex">\(h(X)\)</span>与<span class="arithmatex">\(e\)</span>不相关（即<span class="arithmatex">\(X\)</span>和<span class="arithmatex">\(e\)</span>相互独立）.这里，<span class="arithmatex">\(e\)</span>会影响样本<span class="arithmatex">\(X\)</span>的分布，说明<span class="arithmatex">\(e\)</span>是人为控制的变量，不同的<span class="arithmatex">\(e\)</span>会生成<span class="arithmatex">\(\beta\)</span>的不同取值，最终影响模型的预测效果.</p>
+<p>&emsp;&emsp;根据以上推导，我们可以对线性投影模型作出如下定义：</p>
+<p><strong>定义2.2.2</strong> 对于因变量<span class="arithmatex">\(Y\)</span>和自变量<span class="arithmatex">\(X=(X_1,X_2,\cdots,X_k)^\mathrm{T}\)</span>，如果<span class="arithmatex">\(\mathbb{E}[XX^\mathrm{T}]\)</span>为正定矩阵，则称方程组</p>
+<div class="arithmatex">\[\begin{cases}
+        Y=X^\mathrm{T}\beta+e\\
+        \mathbb{E}[Xe]=0
+    \end{cases}\]</div>
+<p>为<strong>线性投影模型</strong>.其中，线性投影系数<span class="arithmatex">\(\beta\)</span>存在且唯一，其数学表达式为：</p>
+<div class="arithmatex">\[\beta=(\mathbb{E}[XX^\mathrm{T}])^{-1}\mathbb{E}[XY].\]</div>
+<p><strong>注2.2.3</strong> <span class="arithmatex">\(\mathbb{E}[Xe]=0\)</span>和\par\noindent<span class="arithmatex">\(\beta=(\mathbb{E}[XX^\mathrm{T}])^{-1}\mathbb{E}[XY]\)</span>相互等价.</p>
+<p>&emsp;&emsp;现在，考虑自变量中存在常数项的情况，我们将常数项分离出<span class="arithmatex">\(X\)</span>，模型可调整为</p>
+<div class="arithmatex">\[\begin{cases}
+    Y=X^\mathrm{T}\beta+\alpha+e\\
+    \mathbb{E}[Xe]=0\\
+    \mathbb{E}[e]=0
+\end{cases}\]</div>
+<p>&emsp;&emsp;对方程组第一个等式两边取期望，得</p>
+<div class="arithmatex">\[\mathbb{E}[Y]=\mathbb{E}[X^\mathrm{T}\beta]+\mathbb{E}[\alpha]+\mathbb{E}[e]\]</div>
+<p>令<span class="arithmatex">\(\mu_Y=\mathbb{E}[Y]\)</span>，<span class="arithmatex">\(\mu_X=\mathbb{E}[X]\)</span>，则有</p>
+<div class="arithmatex">\[\alpha=\mu_Y-\mu_X^\mathrm{T}\beta\]</div>
+<p>代入第一个等式，得</p>
+<div class="arithmatex">\[Y=X^\mathrm{T}\beta+\mu_Y-\mu_X^\mathrm{T}\beta+e\]</div>
+<p>整理得</p>
+<div class="arithmatex">\[Y-\mu_Y=(X-\mu_X)^\mathrm{T}\beta+e\]</div>
+<p>此时</p>
+<div class="arithmatex">\[\beta=(\mathbb{E}[(X-\mu_X)(X-\mu_X)^\mathrm{T}])^{-1}\mathbb{E}[(X-\mu_X)(Y-\mu_Y)]=(\mathrm{var}(X))^{-1}\mathrm{cov}(X,Y)\]</div>
+<p>&emsp;&emsp;因此，对于含常数项的线性投影模型，我们可以进行如下数学表示：</p>
+<div class="arithmatex">\[\begin{cases}
+    Y=X^\mathrm{T}\beta+\alpha+e\\
+    \alpha=\mu_Y-\mu_X^\mathrm{T}\beta\\
+    \beta=(\mathrm{var}(X))^{-1}\mathrm{cov}(X,Y)
+\end{cases}\]</div>
+<h3 id="222">2.2.2 线性回归模型</h3>
+<p>&emsp;&emsp;当条件期望函数<span class="arithmatex">\(m(X)=\mathbb{E}[Y|X]\)</span>是线性函数，</p>
+<div class="arithmatex">\[m(X)=X^\mathrm{T}\beta\]</div>
+<p>利用条件期望分解，可以得到</p>
+<div class="arithmatex">\[Y=X^\mathrm{T}\beta+e.\]</div>
+<p>&emsp;&emsp;由推论1.3.5(1)可知<span class="arithmatex">\(\mathbb{E}[e|X]=0\)</span>.</p>
+<p><strong>定义2.2.3</strong> 对于因变量<span class="arithmatex">\(Y\)</span>和自变量<span class="arithmatex">\(X=(X_1,X_2,\cdots,X_k)^\mathrm{T}\)</span>，称方程组</p>
+<div class="arithmatex">\[\begin{cases}
+        Y=X^\mathrm{T}\beta+e\\
+        \mathbb{E}[e|X]=0
+    \end{cases}\]</div>
+<p>为<strong>线性回归模型</strong>.</p>
+<p><strong>注2.2.3</strong> 线性回归模型的基本假设：</p>
+<p><strong>零条件均值假设</strong>：<span class="arithmatex">\(\mathbb{E}[e|X]=0\)</span>；</p>
+<p><strong>独立同分布假设</strong>：<span class="arithmatex">\((X_i,Y_i)\)</span>的观测满足独立同分布；</p>
+<p><strong>同方差假设</strong>：<span class="arithmatex">\(\mathrm{var}(e|X)=\sigma^2\)</span>；</p>
+<p><strong>有限峰度假设</strong>：<span class="arithmatex">\(\mathbb{E}[X_i^4]\)</span>和<span class="arithmatex">\(\mathbb{E}[Y_i^4]\)</span>存在；</p>
+<p><strong>不完全共线假设</strong>：对于多元线性回归，解释变量之间不存在完全共线.</p>
+<p>&emsp;&emsp;这里，我们将线性回归模型和线性投影模型进行比较.</p>
+<p>&emsp;&emsp;在线性回归模型中，由推论1.3.5(2)可知，<span class="arithmatex">\(\mathrm{cov}(e,h(X))=0\)</span>，<span class="arithmatex">\(h(X)\)</span>为任意关于<span class="arithmatex">\(X\)</span>的函数，因此<span class="arithmatex">\(e,X\)</span>相互独立.由<span class="arithmatex">\(\mathrm{cov}(e,X)=0\)</span>可以推得<span class="arithmatex">\(\mathbb{E}[Xe]=0\)</span>，然而由<span class="arithmatex">\(\mathbb{E}[Xe]=0\)</span>无法推得<span class="arithmatex">\(\mathbb{E}[e|X]=0\)</span>.这说明线性回归模型的条件较线性投影模型更强，具有<strong>严格外生性</strong>.在线性回归模型中，<span class="arithmatex">\(e\)</span>是自然设定的变量，不依赖于<span class="arithmatex">\((X,Y)\)</span>的分布，该模型适用于<span class="arithmatex">\(Y\)</span>和<span class="arithmatex">\(X\)</span>因果问题的函数表达；而在线性投影模型中，<span class="arithmatex">\(e\)</span>是人为设定的变量，该模型适用于<span class="arithmatex">\(Y\)</span>和<span class="arithmatex">\(X\)</span>相关问题的函数表达.</p>
+<p>&emsp;&emsp;两个模型基本假设不同，线性投影模型只要求解释变量和扰动项<strong>正交</strong>，即<span class="arithmatex">\(\mathbb{E}[Xe]=0\)</span>；而线性回归模型在解释变量和扰动项正交的基础上，还要求具备严格外生性，即<span class="arithmatex">\(\mathbb{E}[e|X]=0\)</span>.</p>
+<p>&emsp;&emsp;现在，我们将<span class="arithmatex">\(X\)</span>的维数设定为一维，从最简单的线性回归模型开始讨论.</p>
+<p><strong>定义2.2.4</strong> 定义</p>
+<div class="arithmatex">\[Y_i=\beta_0+\beta_1X_i+u_i\]</div>
+<p>为<strong>简单线性回归模型</strong>，其中<span class="arithmatex">\(Y_i\)</span>为<strong>被解释变量</strong>，<span class="arithmatex">\(X_i\)</span>为<strong>解释变量</strong>，<span class="arithmatex">\(\beta_0+\beta_1X_i\)</span>为<strong>总体回归线</strong>，<span class="arithmatex">\(\beta_0\)</span>和<span class="arithmatex">\(\beta_1\)</span>分别为总体回归线的<strong>截距</strong>和<strong>斜率</strong>.</p>
+<p><strong>注2.2.4</strong> 线性回归模型中，<span class="arithmatex">\(\beta\)</span>中通常包含常数项，即并非过原点回归. 接下来所有关于线性回归模型的讨论都基于<span class="arithmatex">\(\beta\)</span>存在常数项的情况.</p>
+<h2 id="23">2.3 回归系数的估计</h2>
+<p>&emsp;&emsp;我们利用<strong>普通最小二乘</strong>（Ordinary Least Squares，简称OLS）对简单线性回归模型中的<span class="arithmatex">\(\beta_0\)</span>和<span class="arithmatex">\(\beta_1\)</span>进行估计.令<span class="arithmatex">\(\hat{\beta_0}\)</span>和<span class="arithmatex">\(\hat{\beta_1}\)</span>分别为<span class="arithmatex">\(\beta_0\)</span>和<span class="arithmatex">\(\beta_1\)</span>的估计量，则相应的回归线为<span class="arithmatex">\(\hat{\beta_0}+\hat{\beta_1}X\)</span>
+，故第<span class="arithmatex">\(i\)</span>个观测的预测误差为<span class="arithmatex">\(Y_i-\hat{\beta_0}-\hat{\beta_1}X_i\)</span>.现在需令所有的误差平方和最小，即</p>
+<div class="arithmatex">\[\sum_{i=1}^{n}(Y_i-\hat{\beta_0}-\hat{\beta_1}X_i)^2\]</div>
+<p>最小.由于预测效果受为<span class="arithmatex">\(\hat{\beta_0}\)</span>和<span class="arithmatex">\(\hat{\beta_1}\)</span>影响，上式为关于<span class="arithmatex">\(\hat{\beta_0}\)</span>和<span class="arithmatex">\(\hat{\beta_1}\)</span>的函数，故对<span class="arithmatex">\(\hat{\beta_0}\)</span>和<span class="arithmatex">\(\hat{\beta_1}\)</span>偏导求极值.</p>
+<div class="arithmatex">\[\begin{cases}
+    \sum_{i=1}^{n}(Y_i-\hat{\beta_0}-\hat{\beta_1}X_i)=0\\
+    \sum_{i=1}^{n}X_i(Y_i-\hat{\beta_0}-\hat{\beta_1}X_i)=0
+\end{cases}\]</div>
+<p>&emsp;&emsp;我们称上面的方程组为<strong>正规方程组</strong>.现在对<span class="arithmatex">\(\hat{\beta_0}\)</span>和<span class="arithmatex">\(\hat{\beta_1}\)</span>进行求解，将方程组进行整理可得</p>
+<div class="arithmatex">\[\begin{cases}
+    n\hat{\beta_0}+\sum_{i=1}^{n}X_i\hat{\beta_1}=\sum_{i=1}^{n}Y_i\\
+    \sum_{i=1}^{n}X_i\hat{\beta_0}+\sum_{i=1}^{n}X_i^2\hat{\beta_1}=\sum_{i=1}^{n}X_iY_i
+\end{cases}\]</div>
+<p>解得</p>
+<div class="arithmatex">\[\hat{\beta_1}=\frac{\sum_{i=1}^{n}(X_i-\bar{X})Y_i}{\sum_{i=1}^{n}(X_i-\bar{X})X_i}=\frac{\sum_{i=1}^{n}(X_i-\bar{X})(Y_i-\bar{Y})}{\sum_{i=1}^{n}(X_i-\bar{X})^2}=\frac{s_{XY}}{s_{XX}},\,\hat{\beta_0}=\bar{Y}-\hat{\beta_1}\bar{X}.\]</div>
+<p>&emsp;&emsp;我们称上式使误差平方和最小的截距和斜率为<span class="arithmatex">\(\beta_0\)</span>和<span class="arithmatex">\(\beta_1\)</span>的<strong>OLS估计量</strong>.此时<span class="arithmatex">\(\hat{\beta_0}+\hat{\beta_1}X\)</span>称为<strong>OLS回归线</strong>或<strong>样本回归线</strong>，基于OLS回归线在给定<span class="arithmatex">\(X_i\)</span>时<span class="arithmatex">\(Y_i\)</span>的<strong>预测值</strong>为<span class="arithmatex">\(\hat{Y_i}=\hat{\beta_0}+\hat{\beta_1}X_i\)</span>，<span class="arithmatex">\(\hat{u_i}=Y_i-\hat{Y_i}\)</span>称为第<span class="arithmatex">\(i\)</span>个观测值的<strong>残差</strong>，<span class="arithmatex">\(\sum_{i=1}^{n}\hat{u_i}^2\)</span>称为<strong>残差平方和</strong>（<span class="arithmatex">\(SSR\)</span>）.</p>
+<p>&emsp;&emsp;此时正规方程组可简化为</p>
+<div class="arithmatex">\[\begin{cases}
+    \sum_{i=1}^{n}\hat{u_i}=0\\
+    \sum_{i=1}^{n}X_i\hat{u_i}=0
+\end{cases}\]</div>
+<p><strong>定理2.3.1</strong></p>
+<div class="arithmatex">\[\frac{1}{n}\sum_{i=1}^{n}\hat{Y_i}=\bar{Y}\]</div>
+<p>证明：由<span class="arithmatex">\(Y_i=\hat{Y_i}+\hat{u_i}\)</span>可得</p>
+<div class="arithmatex">\[\sum_{i=1}^{n}Y_i=\sum_{i=1}^{n}\hat{Y_i}+\sum_{i=1}^{n}\hat{u_i}\]</div>
+<p>由正规方程组可得</p>
+<div class="arithmatex">\[\sum_{i=1}^{n}\hat{u_i}=0\]</div>
+<p>因此有</p>
+<div class="arithmatex">\[\sum_{i=1}^{n}\hat{Y_i}=\sum_{i=1}^{n}Y_i=\sum_{i=1}^{n}\bar{Y}\]</div>
+<p>即</p>
+<div class="arithmatex">\[\frac{1}{n}\sum_{i=1}^{n}\hat{Y_i}=\bar{Y}\]</div>
+<h3 id="231">2.3.1 回归系数的期望和方差</h3>
+<p>&emsp;&emsp;得到估计量的表达式后，我们需要对估计量的性质进行评估.现验证<span class="arithmatex">\(\hat{\beta_1}\)</span>的无偏性.</p>
+<div class="arithmatex">\[\begin{align*}
+    \hat{\beta_1}&amp;=\frac{\sum_{i=1}^{n}(X_i-\bar{X})Y_i}{\sum_{i=1}^{n}(X_i-\bar{X})X_i}\\
+    &amp;=\frac{\sum_{i=1}^{n}(X_i-\bar{X})(\beta_0+\beta_1X_i+u_i)}{\sum_{i=1}^{n}(X_i-\bar{X})X_i}\\
+    &amp;=\beta_1+\frac{\sum_{i=1}^{n}(X_i-\bar{X})u_i}{\sum_{i=1}^{n}(X_i-\bar{X})^2}
+\end{align*}\]</div>
+<p>对<span class="arithmatex">\(\hat{\beta_1}-\beta_1\)</span>取条件期望，得</p>
+<div class="arithmatex">\[\mathbb{E}[\hat{\beta_1}-\beta_1|X_1,X_2,\cdots,X_n]=\frac{\sum_{i=1}^{n}(X_i-\bar{X})\mathbb{E}[u_i|X_1, X_2,\cdots,X_n]}{\sum_{i=1}^{n}(X_i-\bar{X})^2}=0\]</div>
+<p>根据迭代期望法则，有</p>
+<div class="arithmatex">\[\mathbb{E}[\hat{\beta_1}-\beta_1]=\mathbb{E}[\mathbb{E}[\hat{\beta_1}-\beta_1|X_1,X_2,\cdots,X_n]]=0\]</div>
+<p>故</p>
+<div class="arithmatex">\[\mathbb{E}[\hat{\beta_1}]=\beta_1\]</div>
+<p>即<span class="arithmatex">\(\hat{\beta_1}\)</span>是对<span class="arithmatex">\(\beta_1\)</span>的无偏估计.</p>
+<p><strong>注2.3.1</strong> 注意<span class="arithmatex">\(\mathbb{E}[u_i|X_1, X_2,\cdots,X_n]=0\)</span>的证明：</p>
+<p>由零条件均值假设可知，<span class="arithmatex">\(\mathbb{E}[u_i|X_i]=0\)</span>；</p>
+<p>由独立同分布假设可知，<span class="arithmatex">\(\mathbb{E}[u_i|X_j]=0,i\neq j\)</span>.</p>
+<p>&emsp;&emsp;接下来验证<span class="arithmatex">\(\hat{\beta_0}\)</span>的无偏性.</p>
+<div class="arithmatex">\[\begin{align*}
+    \mathbb{E}[\hat{\beta_0}]&amp;=\mathbb{E}[\bar{Y}-\hat{\beta_1}\bar{X}]\\
+    &amp;=\mathbb{E}[\beta_0+\beta_1\bar{X}+\bar{u}-\hat{\beta_1}\bar{X}]\\
+    &amp;=\beta_0+\mathbb{E}[(\beta_1-\hat{\beta_1})\bar{X}]+\mathbb{E}[\bar{u}]\\
+    &amp;=\beta_0
+\end{align*}\]</div>
+<p>即<span class="arithmatex">\(\hat{\beta_0}\)</span>是对<span class="arithmatex">\(\beta_0\)</span>的无偏估计.</p>
+<p>&emsp;&emsp;除了知道<span class="arithmatex">\(\hat{\beta_0}\)</span>和<span class="arithmatex">\(\hat{\beta_1}\)</span>的估计是无偏以外，我们关心<span class="arithmatex">\(\hat{\beta_0}\)</span>和<span class="arithmatex">\(\hat{\beta_1}\)</span>的分散程度，而方差是衡量分散程度的常用指标.在同方差假设下，</p>
+<div class="arithmatex">\[\mathbb{E}[u^2]=\mathbb{E}[\mathbb{E}[u^2|X]]=\mathbb{E}[u^2-(\mathbb{E}[u])^2|X]=\mathbb{E}[\mathrm{var}(u|X)]=\sigma^2\]</div>
+<div class="arithmatex">\[\mathrm{var}(u)=\mathbb{E}[u^2]-(\mathbb{E}[u])^2=\sigma^2\]</div>
+<p>由此可见<span class="arithmatex">\(\sigma^2\)</span>是<span class="arithmatex">\(u\)</span>的无条件方差.</p>
+<p>&emsp;&emsp;现在求<span class="arithmatex">\(\hat{\beta_1}\)</span>的方差.</p>
+<div class="arithmatex">\[\mathbb{E}[(\hat{\beta_1}-\beta_1)^2|X_1,X_2,\cdots,X_n]=\mathbb{E}\left[\frac{\sum_{i=1}^{n}(X_i-\bar{X})^2\mathbb{E}[u_i^2|X_1, X_2,\cdots,X_n]}{(\sum_{i=1}^{n}(X_i-\bar{X})^2)^2}\right]=\frac{\sigma^2}{\sum_{i=1}^{n}(X_i-\bar{X})^2}\]</div>
+<div class="arithmatex">\[\begin{align*}
+    \mathrm{var}(\hat{\beta_1})&amp;=\mathbb{E}[(\hat{\beta_1}-\beta_1)^2]-(\mathbb{E}[\hat{\beta_1}-\beta_1])^2\\
+    &amp;=\mathbb{E}[\mathbb{E}[(\hat{\beta_1}-\beta_1)^2|X_1,X_2,\cdots,X_n]]\\
+    &amp;=\frac{\sigma^2}{\sum_{i=1}^{n}(X_i-\bar{X})^2}\\
+    &amp;=\frac{\sigma^2}{n\sigma_x^2}
+\end{align*}\]</div>
+<p>&emsp;&emsp;接下来求<span class="arithmatex">\(\hat{\beta_0}\)</span>的方差.</p>
+<div class="arithmatex">\[\mathrm{var}(\hat{\beta_0})=\mathrm{var}(\beta_0-(\hat{\beta_1}-\beta_1)\bar{X}+\bar{u})=\mathrm{var}(-\hat{\beta_1}\bar{X}+\bar{u})\]</div>
+<p>易证</p>
+<div class="arithmatex">\[\mathrm{cov}(\hat{\beta_1},\bar{u})=0\]</div>
+<p>因此</p>
+<div class="arithmatex">\[\mathrm{var}(\hat{\beta_0})=\mathrm{var}(\hat{\beta_1}\bar{X})+\mathrm{var}(\bar{u})=\left(\frac{1}{n}+\frac{\bar{X}^2}{\sum_{i=1}^{n}(X_i-\bar{X})^2}\right)\sigma^2\]</div>
+<p>由于</p>
+<div class="arithmatex">\[\frac{1}{n}+\frac{\bar{X}^2}{\sum_{i=1}^{n}(X_i-\bar{X})^2}=\frac{\sum_{i=1}^{n}X_i^2-n\bar{X}^2+n\bar{X}^2}{n\sum_{i=1}^{n}(X_i-\bar{X})^2}=\frac{\sum_{i=1}^{n}X_i^2}{n\sum_{i=1}^{n}(X_i-\bar{X})^2}\]</div>
+<p><span class="arithmatex">\(\hat{\beta_0}\)</span>的方差还可表示成</p>
+<div class="arithmatex">\[\mathrm{var}(\hat{\beta_0})=\frac{\sigma^2\sum_{i=1}^{n}X_i^2}{n\sum_{i=1}^{n}(X_i-\bar{X})^2}\]</div>
+<p>&emsp;&emsp;这里，我们对<span class="arithmatex">\(\hat{\beta_1}\)</span>和<span class="arithmatex">\(\hat{\beta_0}\)</span>的期望和方差进行总结：</p>
+<div class="arithmatex">\[\mathbb{E}[\hat{\beta_1}]=\beta_1,\,\mathrm{var}(\hat{\beta_1})=\frac{\sigma^2}{\sum_{i=1}^{n}(X_i-\bar{X})^2}\]</div>
+<div class="arithmatex">\[\mathbb{E}[\hat{\beta_0}]=\beta_0,\,\mathrm{var}(\hat{\beta_0})=\left(\frac{1}{n}+\frac{\bar{X}^2}{\sum_{i=1}^{n}(X_i-\bar{X})^2}\right)\sigma^2\]</div>
+<h3 id="232">2.3.2 估计量的大样本抽样分布</h3>
+<p><strong>引理2.3.1</strong> （斯勒茨基定理，Slutsy's Theorem）若<span class="arithmatex">\(a_n\stackrel{d}{\rightarrow}a\)</span>，<span class="arithmatex">\(b_n\stackrel{p}{\rightarrow}b\)</span>，其中<span class="arithmatex">\(a\)</span>为随机变量，<span class="arithmatex">\(b\)</span>为常数，则有</p>
+<p>(1)<span class="arithmatex">\(a_n+b_n\stackrel{d}{\rightarrow}a+b\)</span>；</p>
+<p>(2)<span class="arithmatex">\(a_nb_n\stackrel{d}{\rightarrow}ab\)</span>；</p>
+<p>(3)<span class="arithmatex">\(\frac{a_n}{b_n}\stackrel{d}{\rightarrow}\frac{a}{b}\)</span>，满足<span class="arithmatex">\(P\{b=0\}=0\)</span>.</p>
+<p>&emsp;&emsp;考察</p>
+<div class="arithmatex">\[\hat{\beta_1}=\beta_1+\frac{\sum_{i=1}^{n}(X_i-\bar{X})u_i}{\sum_{i=1}^{n}(X_i-\bar{X})^2}\]</div>
+<p>令<span class="arithmatex">\(v_i=(X_i-\bar{X})u_i\)</span>，</p>
+<div class="arithmatex">\[v_i\stackrel{p}{\rightarrow}\bar{v}=(X_i-\mu_X)u_i\]</div>
+<div class="arithmatex">\[\mathbb{E}[\bar{v}]=0\]</div>
+<p>又因为<span class="arithmatex">\(v_i\)</span>独立同分布，<span class="arithmatex">\(\sigma_{v}^2=\mathrm{var}[(X_i-\mu_X)u_i]\)</span>非零有限，</p>
+<div class="arithmatex">\[\sum_{i=1}^{n}v_i\stackrel{d}{\rightarrow}N(0,n\mathrm{var}[(X_i-\mu_X)u_i])\]</div>
+<p>由于</p>
+<div class="arithmatex">\[\sum_{i=1}^{n}(X_i-\bar{X})^2\stackrel{p}{\rightarrow}n\mathrm{var}(X_i)\]</div>
+<p>因此</p>
+<div class="arithmatex">\[\hat{\beta_1}-\beta_1\stackrel{d}{\rightarrow}N\left(0,\frac{\mathrm{var}[(X_i-\mu_X)u_i]}{n(\mathrm{var}(X_i))^2}\right)\]</div>
+<p>即</p>
+<div class="arithmatex">\[\hat{\beta_1}\stackrel{d}{\rightarrow}N\left(\beta_1,\frac{\mathrm{var}[(X_i-\mu_X)u_i]}{n(\mathrm{var}(X_i))^2}\right)\]</div>
+<p>在同方差假设下，<span class="arithmatex">\(\mathrm{var}(u_i|X_1,X_2,\cdots,X_n)=\sigma^2\)</span>，则有</p>
+<div class="arithmatex">\[\begin{align*}
+    \mathrm{var}[(X_i-\mu_X)u_i|X_1,X_2,\cdots,X_n]&amp;=\mathbb{E}[(X_i-\mu_X)^2u_i^2-(\mathbb{E}[(X_i-\mu_X)u_i])^2|X_1,X_2,\cdots,X_n]\\
+    &amp;=\mathbb{E}[(X_i-\mu_X)^2u_i^2|X_1,X_2,\cdots,X_n]\\
+    &amp;=\sigma^2(\mathrm{var}(X_i))
+\end{align*}\]</div>
+<p>因此有</p>
+<div class="arithmatex">\[\hat{\beta_1}\stackrel{d}{\rightarrow}N\left(\beta_1,\frac{\sigma^2}{n\mathrm{var}(X)}\right)\]</div>
+<p><strong>引理2.3.2</strong> （连续映射定理，The Continuous Mapping Theorem）若<span class="arithmatex">\(x_n\)</span>是一个<span class="arithmatex">\(k\)</span>维随机变量序列，向量值函数<span class="arithmatex">\(f:\mathbb{R}^k\mapsto\mathbb{R}^m\)</span>在<span class="arithmatex">\(x_0\)</span>处连续，</p>
+<p>(1)当<span class="arithmatex">\(x_n\stackrel{p}{\rightarrow}x_0\)</span>时，<span class="arithmatex">\(f(x_n)\stackrel{p}{\rightarrow}f(x_0)\)</span>；</p>
+<p>(2)当<span class="arithmatex">\(x_n\stackrel{d}{\rightarrow}x_0\)</span>时，<span class="arithmatex">\(f(x_n)\stackrel{d}{\rightarrow}f(x_0)\)</span>.</p>
+<p>&emsp;&emsp;现在，我们来求<span class="arithmatex">\(\hat{\beta_0}\)</span>的大样本方差.</p>
+<p>&emsp;&emsp;对<span class="arithmatex">\(\mathrm{var}(\hat{\beta_0})\)</span>的表达式进行变换，有</p>
+<div class="arithmatex">\[\begin{align*}
+    \mathrm{var}(\hat{\beta_0})&amp;=\frac{\sigma^2\sum_{i=1}^{n}X_i^2}{n\sum_{i=1}^{n}(X_i-\bar{X})^2}\\
+    &amp;=\frac{\sigma^2\sum_{i=1}^{n}X_i^2}{n\sum_{i=1}^{n}X_i^2-(\sum_{i=1}^nX_i)^2}\\
+    &amp;=\frac{\frac{1}{n}\sigma^2\sum_{i=1}^{n}X_i^2}{n\left[\frac{1}{n}\sum_{i=1}^{n}X_i^2-(\sum_{i=1}^n\frac{1}{n}X_i)^2\right]}\\
+\end{align*}\]</div>
+<p>在大样本条件下，</p>
+<div class="arithmatex">\[\frac{1}{n}X_i\stackrel{p}{\rightarrow}\mu_X\]</div>
+<div class="arithmatex">\[\frac{1}{n}\sum_{i=1}^{n}X_i^2\stackrel{p}{\rightarrow}\mathbb{E}[X_i^2]\]</div>
+<p>因此有</p>
+<div class="arithmatex">\[\mathrm{var}(\hat{\beta_0})\stackrel{p}{\rightarrow}\frac{\sigma^2\mathbb{E}[X_i^2]}{n(\mathbb{E}[X_i^2]-\mu_X^2)}\]</div>
+<p>而</p>
+<div class="arithmatex">\[\frac{\sigma^2\mathbb{E}[X_i^2]}{n(\mathbb{E}[X_i^2]-\mu_X^2)}=\frac{\sigma^2}{n\left(1-\frac{\mu_X^2}{\mathbb{E}[X_i^2]}\right)}\]</div>
+<p>&emsp;&emsp;设</p>
+<div class="arithmatex">\[H_i=1-\frac{\mu_X}{\mathbb{E}[X_i^2]}X_i\]</div>
+<p>有</p>
+<div class="arithmatex">\[H_i^2=1-2\frac{\mu_X}{\mathbb{E}[X_i^2]}X_i+\frac{\mu_X^2}{(\mathbb{E}[X_i^2])^2}X_i^2\]</div>
+<p>两边同时取期望，得</p>
+<div class="arithmatex">\[\mathbb{E}[H_i^2]=1-\frac{\mu_X^2}{\mathbb{E}[X_i^2]}\]</div>
+<p>易知<span class="arithmatex">\(H_i\)</span>和<span class="arithmatex">\(u_i\)</span>相互独立，计算<span class="arithmatex">\(\mathrm{var}(H_iu_i)\)</span>，得</p>
+<div class="arithmatex">\[\mathrm{var}(H_iu_i)=\mathbb{E}[H_i^2]\mathbb{E}[u_i^2]=\mathbb{E}[H_i^2]\sigma^2\]</div>
+<p>因此</p>
+<div class="arithmatex">\[\frac{\sigma^2}{n(1-\frac{\mu_X^2}{\mathbb{E}[X_i^2]})}=\frac{\mathrm{var}(H_iu_i)}{n(\mathbb{E}[H_i^2])^2}\]</div>
+<p>即</p>
+<div class="arithmatex">\[\mathrm{var}(\hat{\beta_0})\stackrel{p}{\rightarrow}\frac{\mathrm{var}(H_iu_i)}{n(\mathbb{E}[H_i^2])^2}\]</div>
+<p>&emsp;&emsp;因此有</p>
+<div class="arithmatex">\[\hat{\beta_0}\stackrel{d}{\rightarrow}N\left(\beta_0,\frac{\mathrm{var}(H_iu_i)}{n(\mathbb{E}[H_i^2])^2}\right)\]</div>
+<p>&emsp;&emsp;这里，我们对<span class="arithmatex">\(\hat{\beta_1}\)</span>和<span class="arithmatex">\(\hat{\beta_0}\)</span>的大样本抽样分布进行总结：</p>
+<div class="arithmatex">\[\hat{\beta_1}\stackrel{d}{\rightarrow}N\left(\beta_1,\frac{\mathrm{var}[(X_i-\mu_X)u_i]}{n(\mathrm{var}(X_i))^2}\right)\]</div>
+<div class="arithmatex">\[\hat{\beta_0}\stackrel{d}{\rightarrow}N\left(\beta_0,\frac{\mathrm{var}(H_iu_i)}{n(\mathbb{E}[H_i^2])^2}\right)\mbox{，其中}H_i=1-\frac{\mu_X}{\mathbb{E}[X_i^2]}X_i.\]</div>
+<h2 id="24">2.4 拟合优度</h2>
+<p><strong>定义2.4.1</strong> 定义<span class="arithmatex">\(Y_i\)</span>与其均值偏差的平方和为<strong>总平方和</strong>（<span class="arithmatex">\(TSS\)</span>），<span class="arithmatex">\(\hat{Y_i}\)</span>与<span class="arithmatex">\(Y_i\)</span>均值偏差的平方和为<strong>解释平方和</strong>（<span class="arithmatex">\(ESS\)</span>），<strong>回归<span class="arithmatex">\(R^2\)</span></strong>为解释平方和与总平方和之比，即</p>
+<div class="arithmatex">\[TSS=\sum_{i=1}^{n}(Y_i-\bar{Y})^2\]</div>
+<div class="arithmatex">\[ESS=\sum_{i=1}^{n}(\hat{Y_i}-\bar{Y})^2\]</div>
+<div class="arithmatex">\[R^2=\frac{ESS}{TSS}\]</div>
+<p>&emsp;&emsp;<span class="arithmatex">\(R^2\)</span>表示可由<span class="arithmatex">\(X_i\)</span>解释的<span class="arithmatex">\(Y_i\)</span>的方差的比例，<span class="arithmatex">\(R^2\)</span>越大，拟合优度更良好.</p>
+<p><strong>定理2.4.1</strong></p>
+<div class="arithmatex">\[TSS=ESS+SSR\]</div>
+<div class="arithmatex">\[R^2=1-\frac{SSR}{TSS}\]</div>
+<p>证明：由定理2.1.3和正规方程组可得</p>
+<div class="arithmatex">\[\begin{align*}
+        TSS&amp;=\sum_{i=1}^{n}(Y_i-\bar{Y})^2\\
+        &amp;=\sum_{i=1}^{n}(Y_i-\hat{Y_i}+\hat{Y_i}-\bar{Y})^2\\
+        &amp;=SSR+2\sum_{i=1}^{n}\hat{u_i}(\hat{Y_i}-\bar{Y})+ESS\\
+        &amp;=SSR+2\sum_{i=1}^{n}\hat{u_i}\hat{Y_i}+ESS\\
+        &amp;=SSR+2\sum_{i=1}^{n}\hat{u_i}(\hat{\beta_0}+\hat{\beta_1}X_i)+ESS\\
+        &amp;=SSR+2\hat{\beta_0}\sum_{i=1}^{n}\hat{u_i}+2\hat{\beta_1}\sum_{i=1}^{n}X_i\hat{u_i}+ESS\\
+        &amp;=ESS+SSR
+    \end{align*}\]</div>
+<p>由此可得</p>
+<div class="arithmatex">\[R^2=\frac{ESS}{TSS}=\frac{TSS-SSR}{TSS}=1-\frac{SSR}{TSS}.\]</div>
+<p>&emsp;&emsp;该结论在多元线性回归模型中同样成立，我们将在3.3中进一步证明.</p>
+<h2 id="25">2.5 误差方差的估计</h2>
+<p>&emsp;&emsp;为估计误差方差，需要从残差这一估计量下手. </p>
+<p>&emsp;&emsp;现考察残差平方和</p>
+<div class="arithmatex">\[SSR=\sum_{i=1}^{n}\hat{u_i}^2\]</div>
+<p>令<span class="arithmatex">\(s_{XX}=\sum_{i=1}^{n}(X_i-\bar{X})^2\)</span>，则有</p>
+<div class="arithmatex">\[\begin{align*}
+    \sum_{i=1}^{n}\hat{u_i}^2&amp;=\sum_{i=1}^{n}[Y_i-(\bar{Y}-\hat{\beta_1})-\beta_1X_i]^2\\
+    &amp;=\sum_{i=1}^{n}[(Y_i-\bar{Y})-\hat{\beta_1}(X_i-\bar{X})]^2\\
+    &amp;=\sum_{i=1}^{n}(Y_i-\bar{Y})^2-2\hat{\beta_1}\sum_{i=1}^{n}(X_i-\bar{X})(Y_i-\bar{Y})+\hat{\beta_1}^2\sum_{i=1}^{n}(X_i-\bar{X})^2\\
+    &amp;=\sum_{i=1}^{n}(Y_i-\bar{Y})^2-\frac{[\sum_{i=1}^{n}(X_i-\bar{X})(Y_i-\bar{Y})]^2}{s_{XX}}\\
+    &amp;=\sum_{i=1}^{n}Y_i^2-\left(\frac{1}{\sqrt{n}}\sum_{i=1}^{n}Y_i\right)^2-\left(\sum_{i=1}^{n}\frac{X_i-\bar{X}}{\sqrt{s_{XX}}}Y_i\right)^2
+\end{align*}\]</div>
+<p>令<span class="arithmatex">\(Y=(Y_1,Y_2,\cdots,Y_n)^\mathrm{T}\)</span>，作正交变换<span class="arithmatex">\(Z=AY\)</span>，则有</p>
+<div class="arithmatex">\[Y^\mathrm{T}Y=\sum_{i=1}^{n}Y_i^2=\left(\frac{1}{\sqrt{n}}\sum_{i=1}^{n}Y_i\right)^2+\left(\sum_{i=1}^{n}\frac{X_i-\bar{X}}{\sqrt{s_{XX}}}Y_i\right)^2+\sum_{i=1}^{n}u_i^2=\sum_{i=1}^{n}Z_i^2=Z^\mathrm{T}Z\]</div>
+<p>其中正交矩阵<span class="arithmatex">\(A\)</span>满足</p>
+<div class="arithmatex">\[A=\left(\begin{array}{cccc}
+    \frac{1}{\sqrt{n}} &amp; \frac{1}{\sqrt{n}} &amp; \ldots &amp; \frac{1}{\sqrt{n}}\\
+    \frac{X_i-\bar{X}}{\sqrt{s_{XX}}}  &amp; \frac{X_i-\bar{X}}{\sqrt{s_{XX}}} &amp; \ldots &amp; \frac{X_i-\bar{X}}{\sqrt{s_{XX}}}\\
+    a_{31} &amp; a_{32} &amp; \ldots &amp; a_{3n}\\
+    \vdots &amp; \vdots &amp; \, &amp; \vdots\\
+    a_{n1} &amp; a_{n2} &amp; \ldots &amp; a_{nn}\\
+\end{array}\right)\]</div>
+<p>且有</p>
+<div class="arithmatex">\[Z_1=\frac{1}{\sqrt{n}}\sum_{i=1}^{n}Y_i,\,Z_2=\sum_{i=1}^{n}\frac{X_i-\bar{X}}{\sqrt{s_{XX}}}Y_i,\,Z_k=\sum_{i=1}^{n}a_{ki}Y_i,k=3,4,5,\cdots\]</div>
+<p>则</p>
+<div class="arithmatex">\[\sum_{i=1}^{n}\hat{u_i}^2=\sum_{k=3}^{n}Z_k^2\]</div>
+<p>&emsp;&emsp;由于<span class="arithmatex">\(A\)</span>是正交矩阵，满足<span class="arithmatex">\(A^\mathrm{T}A=I\)</span>，所以</p>
+<div class="arithmatex">\[\sum_{i=1}^{n}a_{ki}a_{ji}=\begin{cases}
+    1,\,k=j\\
+    0,\,k\neq j
+\end{cases},\,\sum_{i=1}^{n}a_{ki}^2=1\]</div>
+<p>当<span class="arithmatex">\(k\geq3\)</span>时，</p>
+<p>&emsp;&emsp;取<span class="arithmatex">\(j=1\)</span>，有</p>
+<div class="arithmatex">\[\frac{1}{\sqrt{n}}\sum_{i=1}^{n}a_{ki}=0\mbox{，即}\sum_{i=1}^{n}a_{ki}=0\]</div>
+<p>&emsp;&emsp;取<span class="arithmatex">\(j=2\)</span>，有</p>
+<div class="arithmatex">\[\frac{X_i-\bar{X}}{\sqrt{s_{XX}}}\sum_{i=1}^{n}a_{ki}=0\mbox{，即}\sum_{i=1}^{n}X_ia_{ki}=\bar{X}\sum_{i=1}^{n}a_{ki}=0\]</div>
+<p>则</p>
+<div class="arithmatex">\[\mathbb{E}[Z_k]=\mathbb{E}\left[\sum_{i=1}^{n}a_{ki}Y_i\right]=\sum_{i=1}^{n}a_{ki}\mathbb{E}[\mathbb{E}[Y_i|X_i]]=\sum_{i=1}^{n}a_{ki}\mathbb{E}[\hat{\beta_0}+\hat{\beta_1}X_i]=\beta_0\sum_{i=1}^{n}a_{ki}+\beta_1\mathbb{E}\left[\sum_{i=1}^{n}a_{ki}X_i\right]=0\]</div>
+<div class="arithmatex">\[\mathrm{var}(Z_k)=\mathrm{var}\left(\sum_{i=1}^{n}a_{ki}Y_i\right)=\sum_{i=1}^{n}a_{ki}^2\mathrm{var}(Y_i)=\sigma^2\]</div>
+<p><strong>注2.5.1</strong> 此处证明使用了正态假设，目的是利用卡方分布的性质求期望，在3.3.2中我们将介绍无正态假设条件下进行误差方差估计的方法.</p>
+<p>&emsp;&emsp;所以</p>
+<div class="arithmatex">\[Z_k\sim N(0,\sigma^2)\]</div>
+<p>则</p>
+<div class="arithmatex">\[\frac{\sum_{i=1}^{n}\hat{u_i}^2}{\sigma^2}\sim\chi^2(n-2)\]</div>
+<p>根据<span class="arithmatex">\(\chi^2\)</span>分布的性质，有</p>
+<div class="arithmatex">\[\mathbb{E}\left[\frac{\sum_{i=1}^{n}\hat{u_i}^2}{\sigma^2}\right]=n-2\]</div>
+<p>整理可得</p>
+<div class="arithmatex">\[\mathbb{E}\left[\frac{\sum_{i=1}^{n}\hat{u_i}^2}{n-2}\right]=\sigma^2\]</div>
+<p>则</p>
+<div class="arithmatex">\[\hat{\sigma^2}=\frac{1}{n-2}\sum_{i=1}^{n}\hat{u_i}^2\]</div>
+<p>其中，<span class="arithmatex">\(\hat{\sigma^2}\)</span>是<span class="arithmatex">\(\sigma^2\)</span>的无偏估计，<span class="arithmatex">\(\hat{\sigma}\)</span>称为\textbf{回归标准误（<span class="arithmatex">\(SER\)</span>）}，记作</p>
+<div class="arithmatex">\[SER=\sqrt{\frac{1}{n-2}\sum_{i=1}^{n}\hat{u_i}^2}=\sqrt{\frac{SSR}{n-2}}\]</div>
+<p>&emsp;&emsp;类似地，我们在估计<span class="arithmatex">\(\hat{\beta_1}\)</span>的方差时，使用样本方差</p>
+<div class="arithmatex">\[\hat{\sigma}_{\hat{\beta_1}}^2=\frac{n\sum_{i=1}^{n}(X_i-\bar{X})^2\hat{u_i}^2}{(n-2)(\sum_{i=1}^{n}(X_i-\bar{X})^2)^2}\]</div>
+<p>来近似，<span class="arithmatex">\(\hat{\sigma}_{\hat{\beta_1}}\)</span>称为<span class="arithmatex">\(\hat{\beta_1}\)</span>的\textbf{异方差稳健标准误}，记作</p>
+<div class="arithmatex">\[SE(\hat{\beta_1})=\sqrt{\frac{n\sum_{i=1}^{n}(X_i-\bar{X})^2\hat{u_i}^2}{(n-2)(\sum_{i=1}^{n}(X_i-\bar{X})^2)^2}}\]</div>
+<h2 id="26">2.6 置信区间和假设检验</h2>
+<p>&emsp;&emsp;在2.3.2中，我们证得，在大样本条件下，</p>
+<div class="arithmatex">\[\hat{\beta_1}\sim N\left(\beta_1,\frac{\mathrm{var}[(X_i-\mu_X)u_i]}{n(\mathrm{var}(X_i))^2}\right)\]</div>
+<p>现在用<span class="arithmatex">\(SE(\hat{\beta_1})\)</span>来近似<span class="arithmatex">\(\hat{\beta_1}\)</span>的方差，可构造<span class="arithmatex">\(t\)</span>统计量</p>
+<div class="arithmatex">\[t=\frac{\hat{\beta_1}-\beta_1}{SE(\hat{\beta_1})}\sim t(n-2)\]</div>
+<p><strong>注2.6.1</strong> 一般来说，<span class="arithmatex">\(t\)</span>统计量具有如下形式：</p>
+<div class="arithmatex">\[t=\frac{\mbox{估计量}-\mbox{假设值}}{\mbox{估计量的标准误}}\]</div>
+<p>&emsp;&emsp;考虑到大样本情况，<span class="arithmatex">\(t\)</span>分布近似为标准正态分布，即</p>
+<div class="arithmatex">\[t\sim N(0,1)\]</div>
+<p>&emsp;&emsp;我们可以据此对<span class="arithmatex">\(\beta_1\)</span>构造置信区间和进行假设检验.</p>
+<p>置信区间：</p>
+<div class="arithmatex">\[\left(\hat{\beta_1}-z_{\frac{\alpha}{2}}SE(\hat{\beta_1}),\hat{\beta_1}+z_{\frac{\alpha}{2}}SE(\hat{\beta_1})\right)\]</div>
+<p>双边检验：</p>
+<div class="arithmatex">\[H_0:\beta_1=\beta_{1,0},\,H_1:\beta_1\neq\beta_{1,0}\]</div>
+<p>&emsp;&emsp;拒绝域为</p>
+<div class="arithmatex">\[|t|\geq z_{\frac{\alpha}{2}}\]</div>
+<p>单边检验（左侧）：</p>
+<div class="arithmatex">\[H_0:\beta_1=\beta_{1,0},\,H_1:\beta_1&lt;\beta_{1,0}\]</div>
+<p>&emsp;&emsp;拒绝域为</p>
+<div class="arithmatex">\[t\leq z_\alpha\]</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; Jeffery Chung
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["toc.integrate"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+      
+        <script src="../assets/mathjax.js"></script>
+      
+    
+  </body>
+</html>

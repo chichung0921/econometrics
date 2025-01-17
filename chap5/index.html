@@ -1,0 +1,575 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/chichung0921/fdeconometrics.git/chap5/">
+      
+      
+        <link rel="prev" href="../chap4/">
+      
+      
+        <link rel="next" href="../chap6/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>5 面板数据回归 - 计量经济学</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/font.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#5" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="计量经济学" class="md-header__button md-logo" aria-label="计量经济学" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            计量经济学
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5 面板数据回归
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="计量经济学" class="md-nav__button md-logo" aria-label="计量经济学" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    计量经济学
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1 概率论与数理统计基础
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 简单线性回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 多元线性回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 工具变量回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    5 面板数据回归
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    5 面板数据回归
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 固定效应模型
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 固定效应模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#511" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1.1 个体固定效应
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1.1 个体固定效应">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      固定效应估计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      一阶差分估计
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#512" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1.2 时间固定效应
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 随机效应模型
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 双重差分法
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6 断点回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="5">5 面板数据回归</h1>
+<h2 id="51">5.1 固定效应模型</h2>
+<h3 id="511">5.1.1 个体固定效应</h3>
+<p><strong>定义5.1.1</strong> 定义</p>
+<div class="arithmatex">\[Y_{it}=X_{it}^\prime\beta+Z_i^\prime\delta+u_i+\epsilon_{it}\]</div>
+<p>为<strong>个体固定效应模型</strong>，其中<span class="arithmatex">\(X_{it}\)</span>随时间和个体而变，<span class="arithmatex">\(Z_i\)</span>不随时间变化但随个体变化，<span class="arithmatex">\(u_i\)</span>为<strong>不可观测</strong>的代表个体异质性且与某个解释变量相关的截距项（称为<strong>个体固定效应</strong>），<span class="arithmatex">\(\epsilon_{it}\)</span>为随时间和个体而变的扰动项.</p>
+<p>&emsp;&emsp;若将个体虚拟变量引入该模型，则上式可写成</p>
+<div class="arithmatex">\[Y_{it}=X_{it}^\prime\beta+Z_i^\prime\delta+\gamma_2D2_i+\gamma_3D3_i+\cdots+\gamma_NDN_i+\epsilon_{it}\]</div>
+<p>注意，引入的虚拟变量个数应为<span class="arithmatex">\(N-1\)</span>，若引入<span class="arithmatex">\(N\)</span>个虚拟变量，则会引起完全多重共线性.</p>
+<h4 id="_1">固定效应估计</h4>
+<p>&emsp;&emsp;对于固定效应模型，给定个体<span class="arithmatex">\(i\)</span>，将回归方程两边取时间上的平均，得</p>
+<div class="arithmatex">\[\bar{Y}_i=\bar{X}_i^\prime\beta+Z_i^\prime\delta+u_i+\bar{\epsilon_{i}}\]</div>
+<p>两式相减，得</p>
+<div class="arithmatex">\[Y_{it}-\bar{Y}_i=(X_{it}-\bar{X}_i)^\prime\beta+\epsilon_{it}-\bar{\epsilon}_{i}\]</div>
+<p>此时，可以得到<span class="arithmatex">\(\beta\)</span>的固定效应估计，记为<span class="arithmatex">\(\hat{\beta}_{FE}\)</span>，即</p>
+<div class="arithmatex">\[\bar{Y}_{it}=\bar{X}_{it}^\prime\beta+\bar{\epsilon}_{it}\]</div>
+<p>&emsp;&emsp;在该估计中，扰动项必须与<strong>各期</strong>解释变量均不相关，满足严格外生性，即保证<span class="arithmatex">\(X_{it}-\bar{X}_i\)</span>和<span class="arithmatex">\(\epsilon_{it}-\bar{\epsilon}_{i}\)</span>独立.</p>
+<h4 id="_2">一阶差分估计</h4>
+<p>&emsp;&emsp;对固定效应模型两边进行一阶差分，得</p>
+<div class="arithmatex">\[Y_{it}-Y_{i,t-1}=(X_{it}-X_{i,t-1})^\prime\beta+\epsilon_{it}-\epsilon_{i,t-1}\]</div>
+<p>此时，可以得到<span class="arithmatex">\(\beta\)</span>的一阶差分估计，记为<span class="arithmatex">\(\hat{\beta}_{FD}\)</span>.</p>
+<p>&emsp;&emsp;在该估计中，只要求满足<span class="arithmatex">\(X_{it}-X_{i,t-1}\)</span>和<span class="arithmatex">\(\epsilon_{it}-\epsilon_{i,t-1}\)</span>独立这一假设，此一致性条件比固定效应估计的一致性条件更弱. 可以证明，当<span class="arithmatex">\(T=2\)</span>时，<span class="arithmatex">\(\hat{\beta}_{FE}=\hat{\beta}_{FD}\)</span>；当<span class="arithmatex">\(T&gt;2\)</span>时，若<span class="arithmatex">\(\{\epsilon_{it}\}\)</span>独立同分布，<span class="arithmatex">\(\hat{\beta}_{FE}\)</span>比<span class="arithmatex">\(\hat{\beta}_{FD}\)</span>更有效率.</p>
+<h3 id="512">5.1.2 时间固定效应</h3>
+<p><strong>定义5.1.2</strong> 定义</p>
+<div class="arithmatex">\[Y_{it}=X_{it}^\prime\beta+\gamma S_t+\epsilon_{it}=X_{it}^\prime\beta+\lambda_t+\epsilon_{it}\]</div>
+<p>为<strong>时间固定效应模型</strong>，其中<span class="arithmatex">\(X_{it}\)</span>随时间和个体而变，<span class="arithmatex">\(\lambda_t\)</span>为第<span class="arithmatex">\(t\)</span>期独有的截距项（称为<strong>时间固定效应</strong>），<span class="arithmatex">\(\epsilon_{it}\)</span>为随时间和个体而变的扰动项.</p>
+<p>&emsp;&emsp;若将时间虚拟变量引入该模型，则上式可写成</p>
+<div class="arithmatex">\[Y_{it}=X_{it}^\prime\beta+\lambda_2B2_t+\lambda_3B3_t+\cdots+\lambda_TBT_t+\epsilon_{it}\]</div>
+<p>类似地，引入的虚拟变量个数应为<span class="arithmatex">\(T-1\)</span>.</p>
+<p>&emsp;&emsp;若将个体固定效应和时间固定效应混合，可建立模型</p>
+<div class="arithmatex">\[Y_{it}=X_{it}^\prime\beta+Z_i^\prime\delta+\lambda t+u_i+\epsilon_{it}\]</div>
+<p>引入所有虚拟变量，可得</p>
+<div class="arithmatex">\[Y_{it}=X_{it}^\prime\beta+Z_i^\prime\delta+\gamma_2D2_i+\gamma_3D3_i+\cdots+\gamma_NDN_i+\lambda_2B2_t+\lambda_3B3_t+\cdots+\lambda_TBT_t+\epsilon_{it}\]</div>
+<p><strong>注5.1.1</strong> 我们称<span class="arithmatex">\(\lambda t\)</span>为<strong>时间趋势项</strong>，若该项写成虚拟变量的形式，则为<strong>时间固定效应</strong>的一种. 时间趋势项不一定为一次，可以为高次，它可以看成是时间固定效应的线性组合，因此时间固定效应项往往能吸收时间趋势项.</p>
+<h2 id="52">5.2 随机效应模型</h2>
+<p><strong>定义5.2.1</strong> 定义</p>
+<div class="arithmatex">\[Y_{it}=X_{it}^\prime\beta+Z_i^\prime\delta+u_i+\epsilon_{it}\]</div>
+<p>为<strong>随机效应模型</strong>，其中<span class="arithmatex">\(u_i\)</span>和<span class="arithmatex">\(X_{it}\)</span>、<span class="arithmatex">\(Z_i\)</span>均不相关.</p>
+<p>&emsp;&emsp;此时我们可以得到<span class="arithmatex">\(\beta\)</span>的OLS一致性估计. 然而，由于扰动项由<span class="arithmatex">\(u_i+\epsilon_{it}\)</span>组成，不是球形扰动项，因此OLS不是最有效率的. 假设不同个体之间的扰动项互不相关，由于<span class="arithmatex">\(u_i\)</span>的存在，同一个体不同时期的扰动项之间存在自相关，即</p>
+<div class="arithmatex">\[\mathrm{cov}(u_i+\epsilon_{it},u_i+\epsilon_{is})=\begin{cases}
+    \sigma_u^2,\,\mbox{若}t\neq s\\
+    \sigma_u^2+\sigma_\epsilon^2,\,\mbox{若}t=s
+\end{cases}\]</div>
+<p>当<span class="arithmatex">\(t\neq s\)</span>时，自相关系数满足</p>
+<div class="arithmatex">\[\rho=\frac{\sigma_u^2}{\sigma_u^2+\sigma_\epsilon^2}\]</div>
+<p><strong>注5.2.1</strong> 由于面板数据的特点，虽然通常可以假设不同个体之间的扰动项相互独立，但同一个体在不同时期的扰动项之间往往存在自相关，因此对标准误的估计应使用<strong>聚类稳健标准误</strong>. 所谓聚类，就是由每个个体不同时期的所有观测值所组成.</p>
+<p>&emsp;&emsp;因此，可用OLS的残差估计<span class="arithmatex">\(\sigma_u^2+\sigma_\epsilon^2\)</span>，用FE的残差估计<span class="arithmatex">\(\epsilon^2\)</span>，用广义最小二乘法来估计，得到随机效应估计量<span class="arithmatex">\(\hat{\beta}_{RE}\)</span>，即</p>
+<div class="arithmatex">\[Y_{it}-\hat{\theta}\bar{Y_i}=(X_{it}-\hat{\theta}\bar{X}_i)^\prime\beta+(1-\hat{\theta})Z_i^\prime\delta+[(1-\hat{\theta})u_i+(\epsilon_{it}-\hat{\theta}\bar{\epsilon}_i)]\]</div>
+<p>其中<span class="arithmatex">\(\hat{\theta}\)</span>是<span class="arithmatex">\(\theta\)</span>的一致估计量，<span class="arithmatex">\(\theta\)</span>满足</p>
+<div class="arithmatex">\[\theta=1-\frac{\sigma_\epsilon}{\sqrt{T\sigma_u^2+\sigma_\epsilon^2}},\,0\leq\theta\leq1\]</div>
+<p>可以证明，新的扰动项是同方差且无序列相关的.</p>
+<h2 id="53">5.3 双重差分法</h2>
+<p>&emsp;&emsp;现考虑两期面板模型</p>
+<div class="arithmatex">\[Y_{it}=\alpha+\gamma D_t+\beta X_{it}+u_i+\epsilon_{it}\]</div>
+<p>其中，<span class="arithmatex">\(D_t\)</span>为实验期虚拟变量，<span class="arithmatex">\(u_i\)</span>为不可测的个体特征，<span class="arithmatex">\(X_{it}\)</span>为政策虚拟变量，且有</p>
+<div class="arithmatex">\[D_t=\begin{cases}
+    1,\,t=2\\
+    0,\,t=1
+\end{cases},\,X_{it}=\begin{cases}
+    1,\,\mbox{若}i\in\mbox{处理组},\,\mbox{且}t=2\\
+    0,\,\mbox{其他}
+\end{cases}\]</div>
+<p>在2.1中，我们介绍了潜在结果框架，了解到在随机实验的条件下，零条件均值假设的成立. 然而，如果实验未能完全随机化，则<span class="arithmatex">\(X_{it}\)</span>可能与<span class="arithmatex">\(u_i\)</span>有关，从而导致OLS估计不一致.</p>
+<p>&emsp;&emsp;因此，我们用一阶差分对上式进行处理，用第二期减去第一期，消去<span class="arithmatex">\(u_i\)</span>，得</p>
+<div class="arithmatex">\[\Delta Y_{it}=\gamma+\beta\Delta X_{it}+\Delta\epsilon_{it}\]</div>
+<p>根据潜在结果框架，</p>
+<div class="arithmatex">\[\hat{\beta}_{ols}=\Delta\bar{Y}_{T}-\Delta\bar{Y}_{C}\]</div>
+<p>这种估计方法称为<strong>双重差分估计</strong>（DD），估计量记为<span class="arithmatex">\(\hat{\beta}_{DD}\)</span>.</p>
+<p>&emsp;&emsp;显然，以<span class="arithmatex">\(\Delta Y_{it}\)</span>为被解释变量的双重差分法不适用于多期数据，因此需回到以<span class="arithmatex">\(Y_{it}\)</span>为被解释变量的面板模型.建立与原模型等价的方程</p>
+<div class="arithmatex">\[Y_{it}=\beta_0+\beta_1 G_i\cdot D_t+\beta_2G_i+\gamma D_t+\epsilon_{it}\]</div>
+<p>其中，<span class="arithmatex">\(G_i\)</span>为分组虚拟变量，刻画处理组和控制组本身的差异；<span class="arithmatex">\(D_t\)</span>为时间虚拟变量，刻画实验前后两期本身的差异；互动项<span class="arithmatex">\(G_i\cdot D_t=X_{it}\)</span>刻画处理组的政策效应，且</p>
+<div class="arithmatex">\[G_{i}=\begin{cases}
+    1,\,\mbox{若}i\in\mbox{处理组}\\
+    0,\,\mbox{若}i\in\mbox{控制组}
+\end{cases},\,D_t=\begin{cases}
+    1,\,t=2\\
+    0,\,t=1
+\end{cases}\]</div>
+<p>&emsp;&emsp;下面证明上式中的<span class="arithmatex">\(\hat{\beta}_1\)</span>就是<span class="arithmatex">\(\hat{\beta}_{DD}\)</span>，即两个方程等价.</p>
+<p>&emsp;&emsp;令<span class="arithmatex">\(t=1\)</span>，则有</p>
+<div class="arithmatex">\[Y_{i1}=\beta_0+\beta_2G_i+\epsilon_{i1}\]</div>
+<p>令<span class="arithmatex">\(t=2\)</span>，则有</p>
+<div class="arithmatex">\[Y_{i2}=\beta_0+\beta_1 G_i\cdot D_2+\beta_2G_i+\gamma+\epsilon_{i2}\]</div>
+<p>两式相减，得</p>
+<div class="arithmatex">\[\Delta Y_i=\beta_1 G_i\cdot D_2+\gamma+\Delta\epsilon_{i}=\beta_1 X_{i2}+\gamma+\Delta\epsilon_{i}\]</div>
+<p>因此<span class="arithmatex">\(\hat{\beta}_1=\hat{\beta}_{DD}\)</span>.</p>
+<p>&emsp;&emsp;双重差分法的优点在于，它同时控制了分组效应<span class="arithmatex">\(G_i\)</span>和时间效应<span class="arithmatex">\(D_t\)</span>. 其隐含假设是，即使没有政策变化，控制组和处理组的时间趋势也一样，在方程中表现为共同的<span class="arithmatex">\(\gamma D_t\)</span>这一项. </p>
+<p>&emsp;&emsp;如果处理组和控制组没有共同的时间趋势，上述模型需要进行调整，我们需要在模型中加入时间趋势项或时间固定效应来控制二者的时间趋势. 如果加入时间趋势项，则引入变量初始值与时间的交乘项；如果加入时间固定效应，则引入变量初始值与时间固定效应的交乘项. 另外，三重差分法也可以控制时间趋势，但设置的交乘项更为复杂.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; Jeffery Chung
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["toc.integrate"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+      
+        <script src="../assets/mathjax.js"></script>
+      
+    
+  </body>
+</html>

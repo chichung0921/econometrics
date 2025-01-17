@@ -1,0 +1,451 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/chichung0921/fdeconometrics.git/chap6/">
+      
+      
+        <link rel="prev" href="../chap5/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>6 断点回归 - 计量经济学</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/font.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="计量经济学" class="md-header__button md-logo" aria-label="计量经济学" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            计量经济学
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              6 断点回归
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="计量经济学" class="md-nav__button md-logo" aria-label="计量经济学" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    计量经济学
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1 概率论与数理统计基础
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 简单线性回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 多元线性回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 工具变量回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5 面板数据回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    6 断点回归
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    6 断点回归
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 精确断点回归
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 模糊断点回归
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="6">6 断点回归</h1>
+<p>&emsp;&emsp;在处理效应中，如果处理变量<span class="arithmatex">\(D_i\)</span>完全由某连续变量<span class="arithmatex">\(X_i\)</span>是否超过某断点所决定，据此进行分组的变量<span class="arithmatex">\(X_i\)</span>，称为<strong>分配变量</strong>. 考虑规则</p>
+<div class="arithmatex">\[D_i=\begin{cases}
+    1,\,\mbox{若}X_i\geq c\\
+    0,\,\mbox{若}X_i&lt;c
+\end{cases}\]</div>
+<p>此时，断点附近的<strong>局部平均处理效应</strong>（Local Average Treatment Effect）为</p>
+<div class="arithmatex">\[\rho_{LATE}=\mathbb{E}[Y_{1i}-Y_{0i}|X=c]=\mathbb{E}[Y_{1i}|X=c]-\mathbb{E}[Y_{0i}|X=c]=\lim_{X\rightarrow c^+}\mathbb{E}[Y_{1i}|X]-\lim_{X\rightarrow c^-}\mathbb{E}[Y_{0i}|X]\]</div>
+<p>&emsp;&emsp;假设干预前，结果变量<span class="arithmatex">\(Y_i\)</span>与<span class="arithmatex">\(X_i\)</span>之间存在线性关系</p>
+<div class="arithmatex">\[Y_i=\alpha+\beta X_i+\epsilon_i\]</div>
+<p>则实施干预的回归方程可写为</p>
+<div class="arithmatex">\[Y_i=\alpha+\beta(X_i-c)+\delta D_i+\gamma (X_i-c)D_i+u_i\]</div>
+<p>上式中，<span class="arithmatex">\(X_i-c\)</span>为变量<span class="arithmatex">\(X_i\)</span>的标准化，使得其断点为0；并引入交互项<span class="arithmatex">\(\gamma (X_i-c)D_i\)</span>，允许断点两侧回归线斜率可以不同. 此时<span class="arithmatex">\(\hat{\delta}\)</span>就是局部平均处理效应的估计量，由于该回归存在断点，故称为<strong>断点回归</strong>.</p>
+<h2 id="61">6.1 精确断点回归</h2>
+<p><strong>定义6.1.1</strong> 如果断点<span class="arithmatex">\(X=c\)</span>处，个体得到处理的概率从0跳跃到1，我们称这种断点回归为<strong>精确断点回归</strong>（SRD）.</p>
+<p><strong>注6.1.1</strong> 精确断点回归和随机控制实验的区别是：精确断点回归中，分配变量是处理变量的唯一父变量，分配变量可能受其他变量影响；随机控制实验中，处理变量是随机变量的唯一父变量，但处理变量不受任何其他变量影响.</p>
+<p>&emsp;&emsp;精确断点回归的简单情形为</p>
+<div class="arithmatex">\[Y_i=\alpha+\beta(X_i-c)+\delta D_i+\gamma (X_i-c)D_i+u_i\]</div>
+<p>包含处理效应项、断点项、处理效应和断点交互项. 然而，用该方程来估计精确断点回归，存在两个问题. 首先，如果回归函数包含高次项，会导致遗漏变量偏差；其次，断点回归是局部实验，原则上只应使用断点附近的观测值. 为了解决这一问题，我们常在方程中引入高次项，并限定<span class="arithmatex">\(X\)</span>的取值范围，如</p>
+<div class="arithmatex">\[Y_i=\alpha+\beta_1(X_i-c)+\beta_2(X_i-c)^2+\delta D_i+\gamma_1(X_i-c)D_i+\gamma_2(X_i-c)^2D_i+u_i,X_i\in(c-h,c+h)\]</div>
+<h2 id="62">6.2 模糊断点回归</h2>
+<p><strong>定义6.2.1</strong> 如果断点<span class="arithmatex">\(X=c\)</span>处，个体得到处理的概率从<span class="arithmatex">\(p_0(c)\)</span>跳跃到<span class="arithmatex">\(p_1(c)(0&lt;p_0(c)&lt;p_1(c)&lt;1)\)</span>，我们称这种断点回归为<strong>模糊断点回归</strong>（FRD）.</p>
+<p>&emsp;&emsp;模糊断点回归与精确断点回归的不同在于，精确断点回归中处理变量<span class="arithmatex">\(D_i\)</span>完全由分配变量<span class="arithmatex">\(X_i\)</span>决定；模糊断点回归中，处理变量<span class="arithmatex">\(D_i\)</span>不完全由<span class="arithmatex">\(X_i\)</span>决定，一般来说影响处理变量<span class="arithmatex">\(D_i\)</span>的其他因素也会影响结果变量<span class="arithmatex">\(Y_i\)</span>，由此产生内生性。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; Jeffery Chung
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["toc.integrate"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+      
+        <script src="../assets/mathjax.js"></script>
+      
+    
+  </body>
+</html>

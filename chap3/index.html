@@ -1,0 +1,901 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/chichung0921/fdeconometrics.git/chap3/">
+      
+      
+        <link rel="prev" href="../chap2/">
+      
+      
+        <link rel="next" href="../chap4/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>3 多元线性回归 - 计量经济学</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/font.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="计量经济学" class="md-header__button md-logo" aria-label="计量经济学" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            计量经济学
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3 多元线性回归
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="计量经济学" class="md-nav__button md-logo" aria-label="计量经济学" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    计量经济学
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1 概率论与数理统计基础
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 简单线性回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    3 多元线性回归
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    3 多元线性回归
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 回归系数的估计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 回归系数的估计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1.1 回归系数的期望和方差
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1.2 回归系数的大样本抽样分布
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 分块回归和偏回归
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 分块回归和偏回归">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.1 解释变量个数不同时偏回归系数之间的关系
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.2 偏回归系数的期望和方差
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.3 偏回归系数的大样本抽样分布
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 拟合优度和误差方差的估计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 拟合优度和误差方差的估计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.1 拟合优度
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.2 误差方差的估计
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 正态回归
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 正态回归">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.1 置信区间
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4.1 置信区间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#beta_j" class="md-nav__link">
+    <span class="md-ellipsis">
+      \(\beta_j\)的置信区间
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sigma2" class="md-nav__link">
+    <span class="md-ellipsis">
+      \(\sigma^2\)的置信区间
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#342" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.2 假设检验
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4.2 假设检验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#beta_jt" class="md-nav__link">
+    <span class="md-ellipsis">
+      偏回归系数\(\beta_j\)的\(t\)检验
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t" class="md-nav__link">
+    <span class="md-ellipsis">
+      对参数线性组合的\(t\)检验
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#betaf" class="md-nav__link">
+    <span class="md-ellipsis">
+      回归系数\(\beta\)的\(F\)检验
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f" class="md-nav__link">
+    <span class="md-ellipsis">
+      对冗余变量的\(F\)检验
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 工具变量回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5 面板数据回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6 断点回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="3">3 多元线性回归</h1>
+<p>&emsp;&emsp;在2.3.1中，我们证得</p>
+<div class="arithmatex">\[\hat{\beta_1}=\beta_1+\frac{\sum_{i=1}^{n}(X_i-\bar{X})u_i}{\sum_{i=1}^{n}(X_i-\bar{X})^2}\]</div>
+<p>因此有</p>
+<div class="arithmatex">\[\hat{\beta_1}\stackrel{d}{\rightarrow}\beta_1+\frac{\mathrm{cov}(X,u)}{\mathrm{var}(X)}=\beta_1+\rho_{Xu}\frac{\sigma_u}{\sigma_x}\]</div>
+<p>如果模型具有内生性，即<span class="arithmatex">\(\mathrm{cov}(X,u)\neq0\)</span>，<span class="arithmatex">\(\hat{\beta_1}\)</span>不是<span class="arithmatex">\(\beta_1\)</span>的无偏和一致估计，此时简单线性回归出现了遗漏变量偏差. 为了解决这个问题，需要采用多元线性回归.</p>
+<h2 id="31">3.1 回归系数的估计</h2>
+<p><strong>定义3.1.1</strong> 定义</p>
+<div class="arithmatex">\[Y_i=X_i^\prime\beta+u_i\]</div>
+<p>为<strong>多元线性回归模型</strong>.</p>
+<p>&emsp;&emsp;注意到样本多元回归中，</p>
+<div class="arithmatex">\[X_i=\left(\begin{array}{c}
+    1\\
+    X_{i1}\\
+    X_{i2}\\
+    \vdots\\
+    X_{ik}
+\end{array}\right)\]</div>
+<p>而总体多元回归中，</p>
+<div class="arithmatex">\[X_{n\times(k+1)}=\left(\begin{array}{cccc}
+    1&amp;X_{11}&amp;\ldots&amp;X_{1k}\\
+    1&amp;X_{21}&amp;\ldots&amp;X_{2k}\\
+    1&amp;X_{31}&amp;\ldots&amp;X_{3k}\\
+    \vdots&amp;\vdots&amp;\,&amp;\vdots\\
+    1&amp;X_{n1}&amp;\ldots&amp;X_{nk}
+\end{array}\right)\]</div>
+<p>其中，<span class="arithmatex">\(k\)</span>表示解释变量的个数，<span class="arithmatex">\(n\)</span>表示样本数.</p>
+<p>&emsp;&emsp;类似地，我们也可得到多元线性回归的正规方程组. 目标函数为</p>
+<div class="arithmatex">\[\min\sum_{i=1}^{n}(Y_i-X_i^\prime\hat{\beta})^2\]</div>
+<p>对<span class="arithmatex">\(\hat{\beta}\)</span>进行求导，得</p>
+<div class="arithmatex">\[\nabla=-2\sum_{i=1}^{n}X_i^\prime\hat{u_i}=0\]</div>
+<p>即</p>
+<div class="arithmatex">\[\sum_{i=1}^{n}X_i^\prime\hat{u_i}=0\]</div>
+<p>将正规方程组写成标量形式，可得</p>
+<div class="arithmatex">\[\begin{cases}
+    \sum_{i=1}^n\hat{u_i}=0\\
+    \sum_{i=1}^nX_{i1}\hat{u_i}=0\\
+    \sum_{i=1}^nX_{i2}\hat{u_i}=0\\
+    \ldots\\
+    \sum_{i=1}^nX_{ik}\hat{u_i}=0
+\end{cases}\]</div>
+<p>现对正规方程组进行求解：</p>
+<div class="arithmatex">\[X^\prime(Y-X\hat{\beta})=0\]</div>
+<p>即</p>
+<div class="arithmatex">\[\hat{\beta}=(X^\prime X)^{-1}X^\prime Y\]</div>
+<h3 id="311">3.1.1 回归系数的期望和方差</h3>
+<p>&emsp;&emsp;现验证<span class="arithmatex">\(\hat{\beta}\)</span>的无偏性和一致性.</p>
+<div class="arithmatex">\[\mathbb{E}[\hat{\beta}|X]=\mathbb{E}[(X^\prime X)^{-1}X^\prime Y|X]=(X^\prime X)^{-1}X^\prime\mathbb{E}[Y|X]=(X^\prime X)^{-1}X^\prime X\beta=\beta\]</div>
+<p>&emsp;&emsp;由定理2.2.1可知，<span class="arithmatex">\(\beta=(\mathbb{E}[X^\prime X])^{-1}\mathbb{E}[X^\prime Y]\)</span>，根据连续映射定理，可得</p>
+<div class="arithmatex">\[\hat{\beta}=(X^\prime X)^{-1}X^\prime Y\stackrel{p}{\rightarrow}(\mathbb{E}[X_i X_i^\prime])^{-1}\mathbb{E}[X_i Y]=\beta\]</div>
+<p>&emsp;&emsp;接下来求<span class="arithmatex">\(\hat{\beta}\)</span>的条件方差. 设误差方差矩阵为<span class="arithmatex">\(D(d_{ii}=\sigma_i^2,d_{ij}=0,i\neq j)\)</span>，则</p>
+<div class="arithmatex">\[\mathrm{var}(\hat{\beta}|X)=\mathrm{var}((X^\prime X)^{-1}X^\prime Y|X)=(X^\prime X)^{-1}X^\prime DX(X^\prime X)^{-1}\]</div>
+<p>在同方差条件下，由于<span class="arithmatex">\(D=I_n\sigma^2\)</span>，则</p>
+<div class="arithmatex">\[\mathrm{var}(\hat{\beta})=\sigma^2(X^\prime X)^{-1}\]</div>
+<h3 id="312">3.1.2 回归系数的大样本抽样分布</h3>
+<p>&emsp;&emsp;注意到</p>
+<div class="arithmatex">\[\hat{\beta}=(X^\prime X)^{-1}X^\prime Y=(X^\prime X)^{-1}X^\prime (X\beta+u)=\beta+(X^\prime X)^{-1}X^\prime u=\beta+\left(\sum_{i=1}^{n}X_iX_i^\prime\right)^{-1}\left(\sum_{i=1}^{n}X_iu_i\right)\]</div>
+<p>由于</p>
+<div class="arithmatex">\[\mathbb{E}\left[\sum_{i=1}^{n}X_iu_i|X_i\right]=0\]</div>
+<div class="arithmatex">\[\mathrm{var}(X_i u_i)=\mathbb{E}[X_i^\prime X_iu_i^2]\]</div>
+<p>则</p>
+<div class="arithmatex">\[\sum_{i=1}^{n}X_iu_i\stackrel{d}{\rightarrow}N(0,n\mathbb{E}[X_i^\prime X_iu_i^2])\]</div>
+<p>因为</p>
+<div class="arithmatex">\[\left(\sum_{i=1}^{n}X_iX_i^\prime\right)^{-1}\stackrel{p}{\rightarrow}\mathbb{E}[n(X_iX_i^\prime)]^{-1}=\frac{1}{n}\mathbb{E}[(X_iX_i^\prime)]^{-1}\]</div>
+<p>则</p>
+<div class="arithmatex">\[(X^\prime X)^{-1}X^\prime u\stackrel{d}{\rightarrow}N\left( 0,\frac{1}{n}\mathbb{E}[(X_iX_i^\prime)]^{-1}\mathbb{E}[X_i^\prime X_iu_i^2]\mathbb{E}[(X_iX_i^\prime)]^{-1}\right) \]</div>
+<p>即可得到<span class="arithmatex">\(\hat{\beta}\)</span>的大样本抽样分布为</p>
+<div class="arithmatex">\[\hat{\beta}\stackrel{d}{\rightarrow}N\left( \beta,\frac{1}{n}\mathbb{E}[(X_iX_i^\prime)]^{-1}\mathbb{E}[X_i^\prime X_iu_i^2]\mathbb{E}[(X_iX_i^\prime)]^{-1}\right)\]</div>
+<h2 id="32">3.2 分块回归和偏回归</h2>
+<p><strong>定义3.2.1</strong> 定义矩阵</p>
+<div class="arithmatex">\[P=X(X^\prime X)^{-1}X^\prime\]</div>
+<p>为<strong>投影矩阵</strong>.</p>
+<p>&emsp;&emsp;注意到<span class="arithmatex">\(\hat{Y}=X\hat{\beta}=X(X^\prime X)^{-1}X^\prime Y=PY\)</span>，用<span class="arithmatex">\(P\)</span>左乘任何向量可得该向量在超平面<span class="arithmatex">\(X\)</span>上的投影.</p>
+<p><strong>定理3.2.1</strong> （投影矩阵的性质）(1)<span class="arithmatex">\(P^\prime=P\)</span>；</p>
+<p>(2)<span class="arithmatex">\(P^2=P\)</span>；</p>
+<p>(3)<span class="arithmatex">\(PX=X\)</span>；</p>
+<p>(4)<span class="arithmatex">\(\mathrm{r}(P)=\mathrm{tr}(P)=k+1\)</span>.</p>
+<p>证明：</p>
+<div class="arithmatex">\[P^\prime=X((X^\prime X)^\prime)^{-1}X^\prime=X^\prime(X^\prime X)^{-1}X=P\]</div>
+<div class="arithmatex">\[P^2=X(X^\prime X)^{-1}X^\prime X(X^\prime X)^{-1}X^\prime=X(X^\prime X)^{-1}X^\prime=P\]</div>
+<div class="arithmatex">\[PX=X(X^\prime X)^{-1}X^\prime X=X\]</div>
+<p>由于<span class="arithmatex">\(P\)</span>是实对称阵，可进行相似对角化，即</p>
+<div class="arithmatex">\[P=Q^\prime I_{k+1}Q\]</div>
+<p>则有<span class="arithmatex">\(\mathrm{r}(P)=k+1\)</span>. 由幂等矩阵的性质可知，<span class="arithmatex">\(\mathrm{tr}(P)=\mathrm{r}(P)=k+1\)</span>.</p>
+<p><strong>定义3.2.2</strong> 定义矩阵</p>
+<div class="arithmatex">\[M=I_n-P\]</div>
+<p>为<strong>消灭矩阵</strong>.</p>
+<p>&emsp;&emsp;注意到<span class="arithmatex">\(\hat{u}=Y-\hat{Y}=Y-PY=MY\)</span>，用<span class="arithmatex">\(M\)</span>左乘任何向量可得该向量投影后的残差向量.</p>
+<p><strong>定理3.2.2</strong> （消灭矩阵的性质）(1)<span class="arithmatex">\(M^\prime=M\)</span>；</p>
+<p>(2)<span class="arithmatex">\(M^2=M\)</span>；</p>
+<p>(3)<span class="arithmatex">\(MX=0\)</span>；</p>
+<p>(4)<span class="arithmatex">\(PM=0\)</span>；</p>
+<p>(5)<span class="arithmatex">\(\mathrm{r}(M)=\mathrm{tr}(M)=n-k-1\)</span>.</p>
+<p>证明：</p>
+<div class="arithmatex">\[M^\prime=I_n^\prime-P^\prime=I_n-P\]</div>
+<div class="arithmatex">\[M^2=(I_n-P)(I_n-P)=I_n-2P+P^2=I_n-P=M\]</div>
+<div class="arithmatex">\[MX=X-PX=X-X=0\]</div>
+<div class="arithmatex">\[PM=P(I_n-P)=P-P^2=0\]</div>
+<p>由<span class="arithmatex">\(PM=0\)</span>，可得<span class="arithmatex">\(\mathrm{r}(P)+\mathrm{r}(M)\leq n\)</span>；又由<span class="arithmatex">\(P+M=I_n\)</span>，可得<span class="arithmatex">\(n=\mathrm{r}(I_n)\leq \mathrm{r}(P)+\mathrm{r}(M)\)</span>，所以</p>
+<div class="arithmatex">\[\mathrm{r}(P)+\mathrm{r}(M)=n\]</div>
+<p>则有<span class="arithmatex">\(\mathrm{r}(M)=n-k-1\)</span>. 由幂等矩阵的性质可知，<span class="arithmatex">\(\mathrm{tr}(M)=\mathrm{r}(M)=n-k-1\)</span>.</p>
+<p>&emsp;&emsp;利用消灭矩阵的性质，我们可以将残差写成总体误差项的函数</p>
+<div class="arithmatex">\[\hat{u}=MY=M(X\beta+u)=Mu.\]</div>
+<p>进而将残差平方和也写成总体误差项的函数</p>
+<div class="arithmatex">\[SSR=\hat{u}^\prime\hat{u}=u^\prime MMu=u^\prime Mu.\]</div>
+<p>&emsp;&emsp;在多元线性回归中，只要增加一个变量就会对所有的回归系数产生影响，然而仅从<span class="arithmatex">\(\hat{\beta}=(X^\prime X)^{-1}X^\prime Y\)</span>这一表达式中很难看出不同变量的影响.为此，我们将<span class="arithmatex">\(X\)</span>进行分块，即<span class="arithmatex">\(X=(X_1\quad X_2)\)</span>，分别对应于两组解释变量，此时多元线性回归模型可以改写为</p>
+<div class="arithmatex">\[Y=X_1\beta_1+X_2\beta_2+u\]</div>
+<p><span class="arithmatex">\(\hat{\beta}=(X^\prime X)^{-1}X^\prime Y\)</span>可改写为</p>
+<div class="arithmatex">\[\begin{align*}
+    \left(\begin{array}{c}
+        \hat{\beta_1}\\
+        \hat{\beta_2}
+    \end{array}\right)&amp;=\left(\left(\begin{array}{c}
+        X_1^\prime\\
+        X_2^\prime
+    \end{array}\right)(X_1\quad X_2)\right)^{-1}\left(\begin{array}{c}
+        X_1^\prime\\
+        X_2^\prime
+    \end{array}\right)Y\\
+    &amp;=\left(\begin{array}{cc}
+        X_1^\prime X_1&amp; X_1^\prime X_2\\
+        X_2^\prime X_1&amp; X_2^\prime X_2
+    \end{array}\right)^{-1}\left(\begin{array}{c}
+        X_1\\
+        X_2
+    \end{array}\right)Y\\
+    &amp;=\left(\begin{array}{c}
+        (X_1^\prime M_2X_1)^{-1}X_1^\prime M_2\\
+        (X_2^\prime M_1X_2)^{-1}X_2^\prime M_1
+    \end{array}\right)Y
+\end{align*}\]</div>
+<p>令<span class="arithmatex">\(r_1=M_1X_2\)</span>，<span class="arithmatex">\(\tilde{u}_1=M_1Y\)</span>，则</p>
+<div class="arithmatex">\[\hat{\beta_2}=(\hat{r_1}^\prime\hat{r_1})^{-1}\hat{r_1}^\prime\tilde{u}_1\]</div>
+<p>这里可以看出，<span class="arithmatex">\(\hat{r_1}\)</span>是<span class="arithmatex">\(X_2\)</span>对<span class="arithmatex">\(X_1\)</span>回归得到的残差矩阵，<span class="arithmatex">\(\tilde{u}_1\)</span>是<span class="arithmatex">\(Y\)</span>对<span class="arithmatex">\(X_1\)</span>回归得到的残差矩阵，而<span class="arithmatex">\(\hat{\beta_2}\)</span>恰恰是<span class="arithmatex">\(\tilde{u}_1\)</span>对<span class="arithmatex">\(\hat{r_1}\)</span>进行回归所得的回归系数.这就是F<strong>risch-Waugh-Lovell定理</strong>的内容.</p>
+<p>&emsp;&emsp;根据这一定理，我们就可对<strong>偏回归系数</strong><span class="arithmatex">\(\beta_j\)</span>进行估计.设<span class="arithmatex">\(X_j\)</span>是解释变量<span class="arithmatex">\(X_2\)</span>的样本组成的一维行向量. 首先由<span class="arithmatex">\(X_j\)</span>对其他所有解释变量进行回归，得到残差列向量<span class="arithmatex">\(\hat{r}_j\)</span>；再由<span class="arithmatex">\(Y\)</span>对其他所有解释变量进行回归，得到残差列向量<span class="arithmatex">\(\tilde{u}_j\)</span>，则</p>
+<div class="arithmatex">\[\hat{\beta_j}=\frac{\sum_{i=1}^{n}\hat{r}_{ij}\tilde{u}_{ij}}{\sum_{i=1}^{n}\hat{r}_{ij}^2}\]</div>
+<p>由正规方程组易知</p>
+<div class="arithmatex">\[\sum_{i=1}^{n}\hat{r}_{ij}\tilde{u}_{ij}=\sum_{i=1}^{n}\hat{r}_{ij}(Y_i-X^*\tilde{\beta})\sum_{i=1}^{n}\hat{r}_{ij}Y_i\]</div>
+<p>则有</p>
+<div class="arithmatex">\[\hat{\beta_j}=\frac{\sum_{i=1}^{n}\hat{r}_{ij}Y_i}{\sum_{i=1}^{n}\hat{r}_{ij}^2}\]</div>
+<p><span class="arithmatex">\(\beta_j\)</span>是剔除了其他所有解释变量后的残差<span class="arithmatex">\(\hat{r}_{j}\)</span>与<span class="arithmatex">\(Y\)</span>的样本协方差和<span class="arithmatex">\(\hat{r}_{j}\)</span>方差之比.</p>
+<p><strong>注3.2.1</strong> <span class="arithmatex">\(X^*\)</span>为除<span class="arithmatex">\(X_j\)</span>以外的其他解释变量组成的行向量，<span class="arithmatex">\(\tilde{\beta}\)</span>为<span class="arithmatex">\(Y\)</span>对除<span class="arithmatex">\(X_j\)</span>以外的其他解释变量的回归系数列向量，显然<span class="arithmatex">\(\hat{r}_{ij}\)</span>与<span class="arithmatex">\(X^*\)</span>无关.</p>
+<h3 id="321">3.2.1 解释变量个数不同时偏回归系数之间的关系</h3>
+<p>&emsp;&emsp;现在，我们用上述结论探究解释变量个数不同时偏回归系数之间的关系.</p>
+<p>&emsp;&emsp;先考察简单线性回归<span class="arithmatex">\(Y=\gamma_0+\gamma_1X_1+e\)</span>和多元线性回归<span class="arithmatex">\(Y=\beta_0+\beta_1X_1+\cdots+\beta_kX_k+u\)</span>.</p>
+<div class="arithmatex">\[\begin{align*}
+    \hat{\gamma_1}&amp;=\frac{\sum_{i=1}^n(X_{i1}-\bar{X}_1)Y_i}{\sum_{i=1}^n(X_{i1}-\bar{X}_1)^2}\\
+    &amp;=\frac{\sum_{i=1}^n(X_{i1}-\bar{X}_1)(\hat{\beta_0}+\hat{\beta_1}X_{i1}+\cdots+\hat{\beta_k}X_{ik}+\hat{u_i})}{\sum_{i=1}^n(X_{i1}-\bar{X}_1)^2}\\
+    &amp;=\hat{\beta_1}+\hat{\beta_2}\hat{\gamma_{2,1}}+\cdots+\hat{\beta_k}\hat{\gamma_{k,1}}
+\end{align*}\]</div>
+<p><span class="arithmatex">\(\hat{\gamma_{j,1}}\)</span>表示<span class="arithmatex">\(X_j\)</span>对<span class="arithmatex">\(X_1\)</span>的回归系数.</p>
+<p>&emsp;&emsp;再将条件放宽，考察短回归<span class="arithmatex">\(Y=\gamma_0+\gamma_1X_1+\cdots+\gamma_pX_p+e\)</span>和长回归<span class="arithmatex">\(Y=\beta_0+\beta_1X_1+\cdots+\beta_pX_p+\beta_{p+1}X_{p+1}+\cdots+\beta_kX_k+u\)</span>.</p>
+<div class="arithmatex">\[\begin{align*}
+    \hat{\gamma_1}&amp;=\frac{\sum_{i=1}^n\hat{r_i}Y_i}{\sum_{i=1}^n\hat{r_i}^2}\\
+    &amp;=\frac{\sum_{i=1}^n\hat{r_i}(\hat{\beta_0}+\hat{\beta_1}X_{i1}+\cdots+\hat{\beta_k}X_{ik}+\hat{u_i})}{\sum_{i=1}^n\hat{r_i}^2}\\   &amp;=\hat{\beta_1}+\hat{\beta}_{p+1}\frac{\sum_{i=1}^n\hat{r_i}X_{ip+1}}{\sum_{i=1}^n\hat{r_i}^2}+\cdots+\hat{\beta_k}\frac{\sum_{i=1}^n\hat{r_i}X_{ik}}{\sum_{i=1}^n\hat{r_i}^2}\\
+    &amp;=\hat{\beta_1}+\hat{\beta}_{p+1}\hat{\delta}_{p+1,1}+\cdots+\hat{\beta_k}\hat{\delta}_{k,1}
+\end{align*}\]</div>
+<p><span class="arithmatex">\(\hat{\delta}_{j,1}(p+1\leq j\leq k)\)</span>表示<span class="arithmatex">\(X_j\)</span>对<span class="arithmatex">\(X_1\)</span>的回归系数.</p>
+<h3 id="322">3.2.2 偏回归系数的期望和方差</h3>
+<p>&emsp;&emsp;现验证<span class="arithmatex">\(\hat{\beta_j}\)</span>的无偏性.</p>
+<div class="arithmatex">\[\hat{\beta_j}=\frac{\sum_{i=1}^{n}\hat{r}_{ij}Y_i}{\sum_{i=1}^{n}\hat{r}_{ij}^2}=\beta_j+\frac{\sum_{i=1}^{n}\hat{r}_{ij}u_i}{\sum_{i=1}^{n}\hat{r}_{ij}^2}\]</div>
+<p>对<span class="arithmatex">\(\hat{\beta_j}-\beta_j\)</span>取条件期望，得</p>
+<div class="arithmatex">\[\mathbb{E}[\hat{\beta_j}-\beta_j|X_{1j},X_{2j},\cdots,X_{nj}]=\frac{\sum_{i=1}^{n}\hat{r}_{ij}\mathbb{E}[u_i|X_{1j},X_{2j},\cdots,X_{nj}]}{\sum_{i=1}^{n}\hat{r}_{ij}^2}=0\]</div>
+<p>则</p>
+<div class="arithmatex">\[\mathbb{E}[\hat{\beta_j}]=\beta_j\]</div>
+<p>即<span class="arithmatex">\(\hat{\beta_j}\)</span>是<span class="arithmatex">\(\beta_j\)</span>的无偏估计量.</p>
+<p>&emsp;&emsp;在异方差条件下，</p>
+<div class="arithmatex">\[\mathrm{var}(\hat{\beta_j}|X_{1j},X_{2j},\cdots,X_{nj})=\frac{\sum_{i=1}^{n}\hat{r}_{ij}^2\mathbb{E}[u_i^2|X_{1j},X_{2j},\cdots,X_{nj}]}{\sum_{i=1}^{n}\hat{r}_{ij}^2}=\frac{\sum_{i=1}^n\hat{r}_{ij}^2\sigma_i^2}{(\sum_{i=1}^n\hat{r}_{ij}^2)^2}\]</div>
+<p>&emsp;&emsp;在同方差条件下，</p>
+<div class="arithmatex">\[\mathrm{var}(\hat{\beta_j})=\frac{\sigma^2}{\sum_{i=1}^n\hat{r}_{ij}^2}=\frac{\sigma^2}{TSS_j(1-R_j^2)}\]</div>
+<p>其中，<span class="arithmatex">\(TSS_j=\sum_{i=1}^{n}(X_{ij}-\bar{X_j})^2\)</span>是<span class="arithmatex">\(X_j\)</span>的总样本变异，<span class="arithmatex">\(R_j^2\)</span>则是将<span class="arithmatex">\(X_j\)</span>对所有其他自变量（包括截距项）进行回归得到的<span class="arithmatex">\(R^2\)</span>.</p>
+<h3 id="323">3.2.3 偏回归系数的大样本抽样分布</h3>
+<p>&emsp;&emsp;易知</p>
+<div class="arithmatex">\[\sum_{i=1}^{n}\hat{r}_{ij}u_i\stackrel{d}\rightarrow N\left(0,n\mathrm{var}(\hat{r}_{ij}u_i)\right)\]</div>
+<p>设<span class="arithmatex">\(\frac{1}{n}\sum_{i=1}^n\hat{r}_{ij}^2\stackrel{p}\rightarrow a_j^2\)</span>，</p>
+<p>则</p>
+<div class="arithmatex">\[\hat{\beta_j}\stackrel{d}\rightarrow N\left(\beta_j,\frac{\mathrm{var}(\hat{r}_{ij}u_i)}{n(a_j^2)^2}\right)\]</div>
+<p>在同方差假设下，</p>
+<div class="arithmatex">\[\hat{\beta_j}\stackrel{d}\rightarrow N\left(\beta_j,\frac{\sigma^2}{na_j^2}\right)\]</div>
+<h2 id="33">3.3 拟合优度和误差方差的估计</h2>
+<h3 id="331">3.3.1 拟合优度</h3>
+<p>&emsp;&emsp;在简单线性回归中，我们在一元条件下证明了定理2.4.1，现在我们将该定理推广到多元情况.</p>
+<div class="arithmatex">\[\begin{align*}
+    TSS&amp;=Y^\prime Y\\
+    &amp;=(\hat{Y}+\hat{u})^\prime(\hat{Y}+\hat{u})\\
+    &amp;=\hat{Y}^\prime\hat{Y}+2\hat{Y}^\prime\hat{u}+\hat{u}^\prime\hat{u}
+\end{align*}\]</div>
+<p>由于</p>
+<div class="arithmatex">\[\hat{Y}^\prime\hat{u}=Y^\prime PMY=0\]</div>
+<p>则有</p>
+<div class="arithmatex">\[TSS=\hat{Y}^\prime\hat{Y}+\hat{u}^\prime\hat{u}=SSR+ESS.\]</div>
+<h3 id="332">3.3.2 误差方差的估计</h3>
+<p>&emsp;&emsp;考察残差平方和</p>
+<div class="arithmatex">\[SSR=u^\prime Mu=\mathrm{tr}(u^\prime Mu)=\mathrm{tr}(Muu^\prime)\]</div>
+<p>则有</p>
+<div class="arithmatex">\[\mathbb{E}[SSR|X]=\mathrm{tr}(\mathbb{E}[Muu^\prime|X])=\mathrm{tr}(M\mathbb{E}[uu^\prime|X])=\mathrm{tr}(MD)\]</div>
+<p>在同方差假设下，<span class="arithmatex">\(D=I_n\sigma^2\)</span>，则</p>
+<div class="arithmatex">\[\mathbb{E}[SSR]=\sigma^2(n-k-1)\]</div>
+<p>整理可得</p>
+<div class="arithmatex">\[\mathbb{E}\left[\frac{\hat{u}^\prime\hat{u}}{n-k-1}\right]=\sigma^2\]</div>
+<p>则</p>
+<div class="arithmatex">\[\hat{\sigma}^2=\frac{1}{n-k-1}\sum_{i=1}^n\hat{u_i}^2\]</div>
+<div class="arithmatex">\[SER=\sqrt{\frac{1}{n-k-1}\sum_{i=1}^n\hat{u_i}^2}=\sqrt{\frac{SSR}{n-k-1}}\]</div>
+<h2 id="34">3.4 正态回归</h2>
+<p><strong>定义3.4.1</strong> 当<span class="arithmatex">\(u_i|X_i\sim N(0,\sigma^2)\)</span>时，定义</p>
+<div class="arithmatex">\[Y_i=X_i^\prime\beta+\mu_i\]</div>
+<p>为<strong>正态回归模型</strong>.</p>
+<p>&emsp;&emsp;该模型在零条件均值、独立同分布、有限峰度、无完全共线假设的基础上，加入了正态假设，即<span class="arithmatex">\(\mathbb{E}[u|X]=0\)</span>的假设加强为<span class="arithmatex">\(u|X\sim N(0,\sigma^2I_n)\)</span>. 由此，我们可以得到<span class="arithmatex">\(\hat{\beta}\)</span>和<span class="arithmatex">\(\hat{u}\)</span>的条件分布：</p>
+<p>&emsp;&emsp;因为<span class="arithmatex">\(\hat{\beta}=(X^\prime X)^{-1}X^\prime Y=\beta+(X^\prime X)^{-1}X^\prime u\)</span>，则有<span class="arithmatex">\(\mathrm{var}(\hat{\beta}|X)=\sigma^2(X^\prime X)^{-1}X^\prime((X^\prime X)^{-1}X^\prime)^\prime=\sigma^2(X^\prime X)^{-1}\)</span>，那么</p>
+<div class="arithmatex">\[\hat{\beta}|X\sim N(\beta,\sigma^2(X^\prime X)^{-1})\]</div>
+<p>&emsp;&emsp;类似地，由于<span class="arithmatex">\(\hat{u}=Mu\)</span>，则</p>
+<div class="arithmatex">\[\hat{u}|X\sim N(0,\sigma^2M)\]</div>
+<p><strong>定理3.4.1</strong> 在正态回归模型中，<span class="arithmatex">\(\hat{\beta}\)</span>和<span class="arithmatex">\(\hat{u}\)</span>相互独立.</p>
+<p>证明：考察<span class="arithmatex">\(\hat{\beta}\)</span>和<span class="arithmatex">\(\hat{u}\)</span>的联合正态分布.</p>
+<div class="arithmatex">\[\left(\begin{array}{c}\hat{\beta}-\beta\\\hat{u}\end{array}\right)=\left(\begin{array}{c}(X^\prime X)^{-1}X^\prime\\M\end{array}\right)u\]</div>
+<div class="arithmatex">\[\mathrm{var}\left(\left.\left(\begin{array}{c}
+        \hat{\beta}-\beta\\
+        \hat{u}
+    \end{array}\right)\right|X\right)=\sigma^2\left(\begin{array}{c}
+        (X^\prime X)^{-1}X^\prime\\
+        M
+    \end{array}\right)(X(X^\prime X)^{-1}\quad M)=\left(\begin{array}{cc}
+        \sigma^2(X^\prime X)^{-1}&amp;0\\
+        0&amp;\sigma^2M
+    \end{array}\right) \]</div>
+<p>由于<span class="arithmatex">\(\mathrm{cov}(\hat{\beta}-\beta,\hat{u})=0\)</span>，则<span class="arithmatex">\(\mathrm{cov}(\hat{\beta},\hat{u})=0\)</span>，在正态条件下<span class="arithmatex">\(\hat{\beta}\)</span>和<span class="arithmatex">\(\hat{u}\)</span>相互独立.</p>
+<p><strong>定理3.4.2</strong></p>
+<div class="arithmatex">\[\frac{(n-k-1)\hat{\sigma}^2}{\sigma^2}\sim\chi^2(n-k-1)\]</div>
+<p>证明：</p>
+<div class="arithmatex">\[\begin{align*}
+        \frac{(n-k-1)\hat{\sigma}^2}{\sigma^2}&amp;=\frac{\hat{u}^\prime\hat{u}}{\sigma^2}\\
+        &amp;=\left(\frac{u}{\sigma}\right)^\prime M\left(\frac{u}{\sigma}\right)
+    \end{align*}\]</div>
+<p>由定理3.2.2(5)可知<span class="arithmatex">\(\mathrm{r}(M)=n-k-1\)</span>，则</p>
+<div class="arithmatex">\[\frac{(n-k-1)\hat{\sigma}^2}{\sigma^2}\sim\chi^2(n-k-1)\]</div>
+<h3 id="341">3.4.1 置信区间</h3>
+<h4 id="beta_j"><span class="arithmatex">\(\beta_j\)</span>的置信区间</h4>
+<p>构造<span class="arithmatex">\(t\)</span>统计量</p>
+<div class="arithmatex">\[t=\frac{\hat{\beta}_j-\beta_j}{\hat{\sigma}\sqrt{[(X^\prime X)^{-1}]_{jj}}}\sim t(n-k-1)\]</div>
+<p>则<span class="arithmatex">\(\beta_j\)</span>的置信水平为<span class="arithmatex">\(\alpha\)</span>的置信区间为</p>
+<div class="arithmatex">\[\left(\hat{\beta}_j\pm t_{\frac{\alpha}{2}}(n-k-1)\hat{\sigma}\sqrt{[(X^\prime X)^{-1}]_{jj}}\right)\]</div>
+<h4 id="sigma2"><span class="arithmatex">\(\sigma^2\)</span>的置信区间</h4>
+<p>构造<span class="arithmatex">\(\chi^2\)</span>统计量</p>
+<div class="arithmatex">\[\chi^2=\frac{\hat{u}^\prime\hat{u}}{\sigma^2}\sim\chi^2(n-k-1)\]</div>
+<p>则<span class="arithmatex">\(\sigma^2\)</span>的置信水平为<span class="arithmatex">\(\alpha\)</span>的置信区间为</p>
+<div class="arithmatex">\[\left(\frac{\hat{u}^\prime\hat{u}}{\chi_{\frac{\alpha}{2}}^2(n-k-1)},\frac{\hat{u}^\prime\hat{u}}{\chi_{1-\frac{\alpha}{2}}^2(n-k-1)}\right) \]</div>
+<h3 id="342">3.4.2 假设检验</h3>
+<h4 id="beta_jt">偏回归系数<span class="arithmatex">\(\beta_j\)</span>的<span class="arithmatex">\(t\)</span>检验</h4>
+<div class="arithmatex">\[H_0: \beta_j=b,\,H_1: \beta_j\neq b\]</div>
+<p>构造<span class="arithmatex">\(t\)</span>统计量</p>
+<div class="arithmatex">\[t=\frac{\hat{\beta_j}-b}{SE(\hat{\beta_j})}\]</div>
+<p>拒绝域为</p>
+<div class="arithmatex">\[|t|\geq t_{\frac{\alpha}{2}}(n-k-1)\]</div>
+<h4 id="t">对参数线性组合的<span class="arithmatex">\(t\)</span>检验</h4>
+<div class="arithmatex">\[H_0: \beta_1=\beta_2,\,H_1: \beta_1\neq\beta_2\]</div>
+<p>构造<span class="arithmatex">\(t\)</span>统计量</p>
+<div class="arithmatex">\[t=\frac{\hat{\beta_1}-\hat{\beta_2}}{SE(\hat{\beta_1}-\hat{\beta_2})}\]</div>
+<p>其中</p>
+<div class="arithmatex">\[\hat{\beta_1}-\hat{\beta_2}=a^\prime\hat{\beta},\,a=\left( \begin{array}{c}
+        0\\
+        1\\
+        -1\\
+        O
+    \end{array}\right),\,SE(\hat{\beta_1}-\hat{\beta_2})=a^\prime\hat{\sigma}^2(X^\prime X)^{-1}a\]</div>
+<p>拒绝域为</p>
+<div class="arithmatex">\[|t|\geq t_{\frac{\alpha}{2}}(n-k-1)\]</div>
+<h4 id="betaf">回归系数<span class="arithmatex">\(\beta\)</span>的<span class="arithmatex">\(F\)</span>检验</h4>
+<div class="arithmatex">\[H_0: A\beta=b,\,H_1: A\beta\neq b\]</div>
+<p>设<span class="arithmatex">\(\mathrm{r}(A)=m\)</span>，构造<span class="arithmatex">\(F\)</span>统计量</p>
+<div class="arithmatex">\[F=\frac{(A\hat{\beta}-b)^\prime(\hat{\sigma}^2A(X^\prime X)^{-1}A^\prime)^{-1}(A\hat{\beta}-b)}{m}\sim F(m,n-k-1)\]</div>
+<p>拒绝域为</p>
+<div class="arithmatex">\[F\geq F_{\alpha}(m,n-k-1)\]</div>
+<h4 id="f">对冗余变量的<span class="arithmatex">\(F\)</span>检验</h4>
+<div class="arithmatex">\[H_0: \beta_{k-q+1}=\cdots=\beta_k=0,\,H_1: H_0\,\mbox{为假}\]</div>
+<p>无约束回归<span class="arithmatex">\(u\)</span>：<span class="arithmatex">\(Y=\beta_0+\beta_1X_1+\cdots+\beta_{k-q}X_{k-q}+\cdots+\beta_kX_k+u\)</span></p>
+<p>有约束回归<span class="arithmatex">\(r\)</span>：<span class="arithmatex">\(Y=\beta_0+\beta_1X_1+\cdots+\beta_{k-q}X_{k-q}+u\)</span></p>
+<p>基于残差平方和<span class="arithmatex">\(SSR\)</span>的<span class="arithmatex">\(F\)</span>检验：</p>
+<div class="arithmatex">\[F=\frac{(SSR_r-SSR_u)/q}{SSR_u/(n-k-1)}\sim F(q,n-k-1)\]</div>
+<p>基于<span class="arithmatex">\(R^2\)</span>的<span class="arithmatex">\(F\)</span>检验：</p>
+<div class="arithmatex">\[F=\frac{(R_u^2-R_r^2)/q}{(1-R_u^2)/(n-k-1)}\sim F(q,n-k-1)\]</div>
+<p>拒绝域为</p>
+<div class="arithmatex">\[F\geq F_{\alpha}(q,n-k-1)\]</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; Jeffery Chung
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["toc.integrate"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+      
+        <script src="../assets/mathjax.js"></script>
+      
+    
+  </body>
+</html>

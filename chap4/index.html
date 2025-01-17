@@ -1,0 +1,574 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/chichung0921/fdeconometrics.git/chap4/">
+      
+      
+        <link rel="prev" href="../chap3/">
+      
+      
+        <link rel="next" href="../chap5/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>4 工具变量回归 - 计量经济学</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/font.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="计量经济学" class="md-header__button md-logo" aria-label="计量经济学" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            计量经济学
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4 工具变量回归
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="计量经济学" class="md-nav__button md-logo" aria-label="计量经济学" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    计量经济学
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1 概率论与数理统计基础
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 简单线性回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 多元线性回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    4 工具变量回归
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    4 工具变量回归
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 内生性
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 内生性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1.1 度量误差
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1.2 供求曲线
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 工具变量估计
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 两阶段最小二乘
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 工具变量检验
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4 工具变量检验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#441" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4.1 相关性检验
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#442" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4.2 外生性检验
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5 面板数据回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6 断点回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="4">4 工具变量回归</h1>
+<h2 id="41">4.1 内生性</h2>
+<p>&emsp;&emsp;在线性回归模型中，我们有很重要的外生性假设，即满足<span class="arithmatex">\(\mathbb{E}[Xu]=0\)</span>，然而现实中常常会发生\textbf{内生性}问题，即<span class="arithmatex">\(\mathbb{E}[Xu]\neq 0\)</span>，这时线性回归模型便失效了. 这便是我们在第三章引言部分介绍的遗漏变量偏误. 在这种情况下，为了将<span class="arithmatex">\(Y=X^\prime\beta+u\)</span>与线性回归模型的情况进行区分，我们将该式称为<strong>结构方程</strong>.</p>
+<p>&emsp;&emsp;以下是内生性出现的一些实例：</p>
+<h3 id="411">4.1.1 度量误差</h3>
+<p>&emsp;&emsp;假设随机变量<span class="arithmatex">\(Y,Z\)</span>满足<span class="arithmatex">\(\mathbb{E}[Y|Z]=Z^\prime\beta\)</span>，然而<span class="arithmatex">\(Z\)</span>无法观测，于是我们用<span class="arithmatex">\(X=Z+e\)</span>代替<span class="arithmatex">\(Z\)</span>进行回归，其中<span class="arithmatex">\(e\)</span>是测量误差，且满足<span class="arithmatex">\(\mathbb{E}[Ze]=0\)</span>，则有</p>
+<div class="arithmatex">\[Y=Z^\prime\beta+u=(X-e)^\prime\beta+u=X^\prime\beta+v\]</div>
+<p>则<span class="arithmatex">\(v=u-e^\prime\beta\)</span>. 此时<span class="arithmatex">\(\mathbb{E}[Xv]=\mathbb{E}[(Z+e)(u-e^\prime\beta)]=-\mathbb{E}[ee^\prime]\beta\)</span>. 用<span class="arithmatex">\(Y\)</span>对<span class="arithmatex">\(X\)</span>进行偏回归，得到</p>
+<div class="arithmatex">\[\beta^*=\beta+(\mathbb{E}[XX^\prime])^{-1}\mathbb{E}[Xv]=(1-\mathbb{E}[XX^\prime]^{-1}\mathbb{E}[ee^\prime])\beta=(1-\mathbb{E}[ZZ^\prime+ee^\prime]^{-1}\mathbb{E}[ee^\prime])\beta\]</div>
+<p>当测量误差较大，即<span class="arithmatex">\(\mathbb{E}[ee^\prime]\)</span>较大时，<span class="arithmatex">\(\beta^*\rightarrow0\)</span>.</p>
+<h3 id="412">4.1.2 供求曲线</h3>
+<p>&emsp;&emsp;设需求曲线方程为<span class="arithmatex">\(Q=-\beta_1P+u_1\)</span>，供给曲线方程为<span class="arithmatex">\(Q=\beta_2Q+u_2\)</span>，写成矩阵形式为</p>
+<div class="arithmatex">\[\left(\begin{array}{cc}
+        1&amp;\beta_1\\
+        1&amp;-\beta_2
+    \end{array}\right)\left(\begin{array}{c}
+        Q\\
+        P
+    \end{array}\right)=\left(\begin{array}{c}
+        u_1\\
+        u_2
+    \end{array}\right) \]</div>
+<p>解得</p>
+<div class="arithmatex">\[\left(\begin{array}{c}
+        Q\\
+        P
+    \end{array}\right)=\frac{1}{\beta_1+\beta_2}\left(\begin{array}{c}
+        \beta_2u_1+\beta_1u_2\\
+        u_1-u_2
+    \end{array}\right)\]</div>
+<p>设<span class="arithmatex">\(Q\)</span>对<span class="arithmatex">\(P\)</span>的回归方程为<span class="arithmatex">\(Q=\beta^*P+u^*\)</span>则</p>
+<div class="arithmatex">\[\beta^*=\frac{\mathbb{E}[PQ]}{\mathbb{E}[P^2]}=\frac{\beta_2-\beta_1}{2}\]</div>
+<p>可以发现，<span class="arithmatex">\(\beta^*\)</span>既不等于<span class="arithmatex">\(\beta_1\)</span>，也不等于<span class="arithmatex">\(\beta_2\)</span>.</p>
+<h2 id="42">4.2 工具变量估计</h2>
+<p><strong>定义4.2.1</strong> 对于结构方程<span class="arithmatex">\(Y=X^\prime\beta+u\)</span>，其中<span class="arithmatex">\(X\)</span>中含<span class="arithmatex">\(k\)</span>个解释变量，若能找到一个变量<span class="arithmatex">\(Z_{l\times1}\)</span>，满足</p>
+<p>(1)<strong>相关性</strong>：<span class="arithmatex">\(r(\mathbb{E}[ZX^\prime])=k\)</span>（秩条件）；</p>
+<p>(2)<strong>外生性</strong>：<span class="arithmatex">\(\mathbb{E}(Zu)=0\)</span>，</p>
+<p>则称<span class="arithmatex">\(Z\)</span>是<span class="arithmatex">\(X\)</span>的<strong>工具变量</strong>（Instrumental Variable）.</p>
+<p><strong>注4.2.1</strong> <span class="arithmatex">\(l=k\)</span>是矩阵<span class="arithmatex">\(\mathbb{E}[ZX^\prime]\)</span>可逆的必要条件.</p>
+<p>&emsp;&emsp;相关性的这一条件我们又称为<strong>秩条件</strong>，要满足该条件须有<span class="arithmatex">\(l\geq k\)</span>，即<strong>阶条件</strong>. 根据是否满足阶条件可分为三种情况：<strong>不可识别</strong>（unidentified）：<span class="arithmatex">\(l&lt;k\)</span>；<strong>恰好识别</strong>（just or exactly identified）：<span class="arithmatex">\(l=k\)</span>；<strong>过度识别</strong>（overidentified）：<span class="arithmatex">\(l&gt;k\)</span>.</p>
+<p>&emsp;&emsp;当<span class="arithmatex">\(l=k\)</span>时，注意到式子</p>
+<div class="arithmatex">\[\mathbb{E}[ZY]=\mathbb{E}[ZX^\prime\beta]=\mathbb{E}[ZX^\prime]\beta\]</div>
+<p>则</p>
+<div class="arithmatex">\[\beta=(\mathbb{E}[ZX^\prime])^{-1}\mathbb{E}[ZY]\]</div>
+<p>则<span class="arithmatex">\(\beta\)</span>的IV估计为</p>
+<div class="arithmatex">\[\hat{\beta}^{IV}=\left(\sum_{i=1}^{n}Z_iX_i^\prime\right)^{-1}\left(\sum_{i=1}^{n}Z_iY\right)=(Z^\prime X)^{-1}Z^\prime Y\]</div>
+<p>显然，工具变量估计仅适用于恰好识别的情况.</p>
+<h2 id="43">4.3 两阶段最小二乘</h2>
+<p>&emsp;&emsp;当<span class="arithmatex">\(l\geq k\)</span>时，我们作两阶段最小二乘：</p>
+<p>&emsp;&emsp;第一阶段回归：<span class="arithmatex">\(X\)</span>对<span class="arithmatex">\(Z\)</span>进行回归，建立结构方程<span class="arithmatex">\(X=Z^\prime\gamma+u_1\)</span>，得到</p>
+<div class="arithmatex">\[\hat{\gamma}=(Z^\prime Z)^{-1}Z^\prime X\]</div>
+<div class="arithmatex">\[\hat{X}=PX=Z(Z^\prime Z)^{-1}Z^\prime X\]</div>
+<p>将<span class="arithmatex">\(X\)</span>的结构方程代入<span class="arithmatex">\(Y\)</span>的结构方程，得到</p>
+<div class="arithmatex">\[Y=X^\prime\beta+u=(\hat{X}+\hat{u}_1)^\prime\beta+u=\hat{X}^\prime\beta+u_2\]</div>
+<p>&emsp;&emsp;第二阶段回归：<span class="arithmatex">\(Y\)</span>对<span class="arithmatex">\(\hat{X}\)</span>进行回归，建立结构方程<span class="arithmatex">\(Y=\hat{X}^\prime\beta+u_2\)</span>，得到</p>
+<div class="arithmatex">\[\hat{\beta}^{TSLS}=(\hat{X}^\prime\hat{X})^{-1}\hat{X}^\prime Y=(X^\prime Z(Z^\prime Z)^{-1}Z^\prime X)^{-1}X^\prime Z(Z^\prime Z)^{-1}Z^\prime Y\]</div>
+<p>&emsp;&emsp;由于<span class="arithmatex">\(Y=X^\prime\beta+u=\hat{X}^\prime\beta+(u+(X-\hat{X})^\prime\beta)\)</span>，则有</p>
+<div class="arithmatex">\[\mathbb{E}[\hat{X}u_2]=\mathbb{E}[\hat{X}(u+(X-\hat{X})^\prime\beta)]=\mathbb{E}[Z^\prime\hat{\gamma}(u+u_2^\prime\beta)]=\mathbb{E}[Z^\prime\hat{\gamma}u]+\mathbb{E}[(u_2Z)^\prime\beta]=0\]</div>
+<p>此时<span class="arithmatex">\(\hat{X}\)</span>和扰动项正交.</p>
+<p>&emsp;&emsp;当<span class="arithmatex">\(l=k\)</span>时，矩阵<span class="arithmatex">\(X^\prime Z\)</span>可逆，则</p>
+<div class="arithmatex">\[\hat{\beta}^{TSLS}=(Z^\prime X)^{-1}Z^\prime Y\]</div>
+<p>&emsp;&emsp;两阶段最小二乘的实质便是：将内生解释变量<span class="arithmatex">\(X\)</span>分成两个部分，即由工具变量<span class="arithmatex">\(Z\)</span>所造成的外生部分<span class="arithmatex">\(\hat{X}\)</span>和与扰动项相关的其余部分<span class="arithmatex">\(X-\hat{X}\)</span>；然后，被解释变量对外生部分进行回归，从而满足OLS对前定变量的要求而得到一致估计.</p>
+<h2 id="44">4.4 工具变量检验</h2>
+<h3 id="441">4.4.1 相关性检验</h3>
+<p>&emsp;&emsp;易知当<span class="arithmatex">\(l=k\)</span>时，</p>
+<div class="arithmatex">\[\hat{\beta}^{TSLS}=(Z^\prime X)^{-1}Z^\prime Y=\beta+(Z^\prime X)^{-1}Z^\prime u\]</div>
+<p>当<span class="arithmatex">\(Z\)</span>和<span class="arithmatex">\(X\)</span>相关性微弱，即<span class="arithmatex">\(Z\)</span>为<strong>弱工具变量</strong>时，<span class="arithmatex">\((Z^\prime X)^{-1}Z^\prime u\)</span>无法依概率收敛到0，此时<span class="arithmatex">\(\hat{\beta}^{TSLS}\)</span>不是<span class="arithmatex">\(\beta\)</span>的一致性估计.</p>
+<p>&emsp;&emsp;此时，我们用<span class="arithmatex">\(F\)</span>检验进行弱工具变量的检验，可以证明</p>
+<div class="arithmatex">\[\mathbb{E}[\hat{\beta}^{TSLS}]-\beta\approx\frac{\hat{\beta}^{OLS}-\beta}{\mathbb{E}[F]-1}\]</div>
+<p>其中<span class="arithmatex">\(F\)</span>是两阶段最小二乘第一阶段回归中<span class="arithmatex">\(\gamma=0\)</span>这一检验的<span class="arithmatex">\(F\)</span>统计量（回顾3.4中回归系数的<span class="arithmatex">\(F\)</span>检验）.</p>
+<p>&emsp;&emsp;经验法则：当仅有一元内生回归变量时，若<span class="arithmatex">\(F&lt;10\)</span>，<span class="arithmatex">\(TSLS\)</span>估计量有偏，且<span class="arithmatex">\(TSLS\)</span>估计的<span class="arithmatex">\(t\)</span>统计量和置信区间均不可靠.</p>
+<h3 id="442">4.4.2 外生性检验</h3>
+<p>&emsp;&emsp;当外生性不满足时，<span class="arithmatex">\(\mathbb{E}[Z^\prime u]\neq0\)</span>，此时<span class="arithmatex">\(TSLS\)</span>估计量不一致. 此时，我们用<strong>过度识别约束检验</strong>（J检验）对外生性进行检验.</p>
+<p>&emsp;&emsp;建立<span class="arithmatex">\(\hat{u}\)</span>对工具变量的回归方程</p>
+<div class="arithmatex">\[\hat{u}=\delta_0+Z^\prime\delta+W^\prime\xi+e\]</div>
+<p>令<span class="arithmatex">\(F\)</span>为检验<span class="arithmatex">\(\delta=0\)</span>的同方差适用<span class="arithmatex">\(F\)</span>统计量，构造<span class="arithmatex">\(J\)</span>统计量</p>
+<div class="arithmatex">\[J=lF\]</div>
+<p>可以证明，当所有工具变量都为外生的原假设和同方差假设下，大样本条件下<span class="arithmatex">\(J\sim\chi^2(l-k)\)</span>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; Jeffery Chung
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["toc.integrate"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+      
+        <script src="../assets/mathjax.js"></script>
+      
+    
+  </body>
+</html>

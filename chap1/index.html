@@ -1,0 +1,752 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/chichung0921/fdeconometrics.git/chap1/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../chap2/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>1 概率论与数理统计基础 - 计量经济学</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/font.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="计量经济学" class="md-header__button md-logo" aria-label="计量经济学" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            计量经济学
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1 概率论与数理统计基础
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="计量经济学" class="md-nav__button md-logo" aria-label="计量经济学" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    计量经济学
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    1 概率论与数理统计基础
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    1 概率论与数理统计基础
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 参数估计量的性质
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 多维随机变量的分布
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 多维随机变量的分布">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.1 多维随机向量及其数字特征
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.2 多元正态分布
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-chi2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.3 \(\chi^2\)分布
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 条件期望
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 条件期望">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.1 条件期望和条件期望误差
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.2 条件期望函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 简单线性回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 多元线性回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 工具变量回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5 面板数据回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6 断点回归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="1">1 概率论与数理统计基础</h1>
+<h2 id="11">1.1 参数估计量的性质</h2>
+<p><strong>定义1.1.1</strong> 定义</p>
+<div class="arithmatex">\[\mathrm{bias}(\hat{\theta})=\mathbb{E}[\hat{\theta}]-\theta\]</div>
+<p>为估计量的<strong>偏差</strong>.</p>
+<p>&emsp;&emsp;当<span class="arithmatex">\(\mathrm{bias}(\hat{\theta})=0\)</span>时，<span class="arithmatex">\(\hat{\theta}\)</span>是<span class="arithmatex">\(\theta\)</span>的<strong>无偏估计</strong>；</p>
+<p>&emsp;&emsp;当<span class="arithmatex">\({\lim_{n \to +\infty}\mathrm{bias}(\hat{\theta})}=0\)</span>时，<span class="arithmatex">\(\hat{\theta}\)</span>是<span class="arithmatex">\(\theta\)</span>的<strong>渐进无偏估计</strong>；</p>
+<p>&emsp;&emsp;当<span class="arithmatex">\({\lim_{n \to +\infty}P\{|\hat{\theta}-\theta|\geq\epsilon\}}=0\)</span>时，<span class="arithmatex">\(\hat{\theta}\)</span>是<span class="arithmatex">\(\theta\)</span>的<strong>一致估计</strong>.</p>
+<p><strong>定义1.1.2</strong> 定义</p>
+<div class="arithmatex">\[\mathrm{var}(\hat{\theta})=\mathbb{E}[(\hat{\theta}-\mathbb{E}[\theta])^2]\]</div>
+<p>为估计量的<strong>方差</strong>.</p>
+<p>&emsp;&emsp;对于<span class="arithmatex">\(\hat{\theta}\)</span>的两个无偏估计量<span class="arithmatex">\(\hat{\theta_1}\)</span>和<span class="arithmatex">\(\hat{\theta_2}\)</span>，当<span class="arithmatex">\(\mathrm{Var}(\hat{\theta_1})&lt;\mathrm{Var}(\hat{\theta_2})\)</span>，则称<span class="arithmatex">\(\hat{\theta_1}\)</span>相对于<span class="arithmatex">\(\hat{\theta_2}\)</span>是<strong>有效</strong>的；若<span class="arithmatex">\(\hat{\theta_0}\)</span>是所有<span class="arithmatex">\(\hat{\theta}\)</span>的无偏估计量中方差最小的，则称<span class="arithmatex">\(\hat{\theta_0}\)</span>是<span class="arithmatex">\(\hat{\theta}\)</span>的<strong>最优无偏估计量</strong>.</p>
+<p><strong>定义1.1.3</strong> 定义</p>
+<div class="arithmatex">\[\mathrm{mse}(\hat{\theta})=\mathbb{E}[(\hat{\theta}-\theta)^2]\]</div>
+<p>为估计量的<strong>均方误</strong>.</p>
+<p><strong>定理1.1.1</strong> （偏差-方差权衡）</p>
+<div class="arithmatex">\[\mathrm{mse}(\hat{\theta})=\mathrm{var}(\hat{\theta})+\mathrm{bias}^2(\hat{\theta})\]</div>
+<p>证明：</p>
+<div class="arithmatex">\[\begin{align*}
+\mathrm{var}(\hat{\theta})+\mathrm{bias}^2(\hat{\theta})&amp;=\mathbb{E}[\hat{\theta}^2]-(\mathbb{E}[\theta])^2+(\mathbb{E}[\theta])^2-2\theta\mathbb{E}[\hat{\theta}]+\theta^2\\
+&amp;=\mathbb{E}[\hat{\theta}^2-2\theta\hat{\theta}+\theta^2]\\
+&amp;=\mathrm{mse}(\hat{\theta})
+\end{align*}\]</div>
+<h2 id="12">1.2 多维随机变量的分布</h2>
+<h3 id="121">1.2.1 多维随机向量及其数字特征</h3>
+<p><strong>定义1.2.1</strong> 如果<span class="arithmatex">\(X_1,X_2,...,X_n\)</span>都是随机变量，则称<span class="arithmatex">\(\pmb{X}=(X_1,X_2,...X_n)^\mathrm{T}\)</span>为<span class="arithmatex">\(n\)</span>维随机向量，简称<strong>随机向量</strong>.</p>
+<p><strong>定义1.2.2</strong> (1)设<span class="arithmatex">\(\pmb{X}=(X_1,X_2,...X_n)^\mathrm{T}\)</span>是离散型随机向量，则它的分布函数为</p>
+<div class="arithmatex">\[F(\pmb{x})=F(x_1,x_2,...,x_n)=P\{X_1\leq x_1,X_2\leq x_2,...,X_n\leq x_n\}\]</div>
+<p>式中，<span class="arithmatex">\(\pmb{x}=(x_1,x_2,...,x_n)\in\mathbb{R}^n\)</span>，并记成<span class="arithmatex">\(\pmb{X}\sim F\)</span>；</p>
+<p>(2)设<span class="arithmatex">\(\pmb{X}\sim F(\pmb{x})=F(x_1,x_2,...x_n)\)</span>，且<span class="arithmatex">\(\pmb{X}\)</span>为连续型随机向量，若存在一个非负的函数<span class="arithmatex">\(f(\cdot)\)</span>，使得</p>
+<div class="arithmatex">\[F(\pmb{x})=\int_{-\infty}^{x_1}\int_{-\infty}^{x_2}...\int_{-\infty}^{x_n}f(t_1,t_2,...,t_n)\mathrm{d}t_1\mathrm{d}t_2...\mathrm{d}t_n\]</div>
+<p>对一切<span class="arithmatex">\(\pmb{x}\in\mathbb{R}^n\)</span>成立，则称<span class="arithmatex">\(\symbfit{X}\)</span>有分布密度函数<span class="arithmatex">\(f(\cdot).\)</span></p>
+<p><strong>定义1.2.3</strong> 设<span class="arithmatex">\(\pmb{X}=(X_1,X_2,...X_n)^\mathrm{T}\)</span>有<span class="arithmatex">\(n\)</span>个分量，若为<span class="arithmatex">\(\mathbb{E}[X_i]=\mu_i(i=1,2,...,n)\)</span>存在，定义随机向量<span class="arithmatex">\(\pmb{X}\)</span>的均值为</p>
+<div class="arithmatex">\[\mathbb{E}[\symbfit{X}]=\left(
+    \begin{array}{cccc}
+        \mathbb{E}[X_1]\\
+        \mathbb{E}[X_2]\\
+        \vdots\\
+        \mathbb{E}[X_n]
+    \end{array}\right)
+    =\left(
+    \begin{array}{cccc}
+        \mu_1\\
+        \mu_2\\
+        \vdots\\
+        \mu_n
+    \end{array}\right)=\symbfit{\mu}\]</div>
+<p><span class="arithmatex">\(\pmb{\mu}\)</span>是一个<span class="arithmatex">\(n\)</span>维向量，称为均值向量.</p>
+<p><strong>推论1.2.1</strong> 当<span class="arithmatex">\(\pmb{A}\)</span>，<span class="arithmatex">\(\pmb{B}\)</span>为常数矩阵时，由定义1.2.3可推出如下性质：</p>
+<p>(1)<span class="arithmatex">\(\mathbb{E}[\pmb{AX}]=\pmb{A}\mathbb{E}[\pmb{X}]\)</span></p>
+<p>(2)<span class="arithmatex">\(\mathbb{E}[\pmb{AXB}]=\pmb{A}\mathbb{E}[\pmb{X}]\pmb{B}\)</span></p>
+<p>证明：设</p>
+<div class="arithmatex">\[\pmb{A}=\left(
+    \begin{array}{cccc}
+        a_{11} &amp; a_{12} &amp; \ldots &amp; a_{1n}\\
+        a_{21} &amp; a_{22} &amp; \ldots &amp; a_{2n}\\
+        \vdots &amp; \vdots &amp; \, &amp; \vdots\\
+        a_{m1} &amp; a_{m2} &amp; \ldots &amp; a_{mn} 
+    \end{array}\right),\pmb{B}=(b_1,b_2,...,b_s),\]</div>
+<p>则</p>
+<div class="arithmatex">\[\mathbb{E}[\symbfit{AX}]=\left(
+    \begin{array}{cccc}
+        \sum_{i=1}^{n}\mathbb{E}[a_{1i}X_i]\\
+        \sum_{i=1}^{n}\mathbb{E}[a_{2i}X_i]\\
+        \vdots\\
+        \sum_{i=1}^{n}\mathbb{E}[a_{mi}X_i]
+    \end{array}\right)=\left(
+    \begin{array}{cccc}
+        \sum_{i=1}^{n}a_{1i}\mathbb{E}[X_i]\\
+        \sum_{i=1}^{n}a_{2i}\mathbb{E}[X_i]\\
+        \vdots\\
+        \sum_{i=1}^{n}a_{mi}\mathbb{E}[X_i]
+    \end{array}\right)=\symbfit{A}\mathbb{E}[\symbfit{X}]\]</div>
+<div class="arithmatex">\[\begin{align*}
+\mathbb{E}[\symbfit{AXB}]&amp;=\left(\begin{array}{cccc}
+\sum_{i=1}^{n}\mathbb{E}[a_{1i}X_ib_1] &amp; \sum_{i=1}^{n}\mathbb{E}[a_{1i}X_ib_2] &amp; \ldots &amp; \sum_{i=1}^{n}\mathbb{E}[a_{1i}X_ib_s]\\
+\sum_{i=1}^{n}\mathbb{E}[a_{2i}X_ib_1] &amp; \sum_{i=1}^{n}\mathbb{E}[a_{2i}X_ib_2] &amp; \ldots &amp; \sum_{i=1}^{n}\mathbb{E}[a_{2i}X_ib_s]\\
+\vdots &amp; \vdots &amp; \, &amp; \vdots\\
+\sum_{i=1}^{n}\mathbb{E}[a_{mi}X_ib_1] &amp; \sum_{i=1}^{n}\mathbb{E}[a_{mi}X_ib_2] &amp; \ldots &amp; \sum_{i=1}^{n}\mathbb{E}[a_{mi}X_ib_s]
+        \end{array}\right)\\
+        &amp;=\left(\begin{array}{cccc}
+            b_1\sum_{i=1}^{n}a_{1i}\mathbb{E}[X_i] &amp; b_2\sum_{i=1}^{n}a_{1i}\mathbb{E}[X_i] &amp; \ldots &amp; b_s\sum_{i=1}^{n}a_{1i}\mathbb{E}[X_i]\\
+            b_1\sum_{i=1}^{n}a_{2i}\mathbb{E}[X_i] &amp; b_2\sum_{i=1}^{n}a_{2i}\mathbb{E}[X_i] &amp; \ldots &amp; b_s\sum_{i=1}^{n}a_{2i}\mathbb{E}[X_i]\\
+            \vdots &amp; \vdots &amp; \, &amp; \vdots\\
+            b_1\sum_{i=1}^{n}a_{mi}\mathbb{E}[X_i] &amp; b_2\sum_{i=1}^{n}a_{mi}\mathbb{E}[X_i] &amp; \ldots &amp; b_s\sum_{i=1}^{n}a_{mi}\mathbb{E}[X_i]
+        \end{array}\right)\\
+        &amp;=\symbfit{A}\mathbb{E}[\symbfit{X}]\symbfit{B}
+    \end{align*}\]</div>
+<p><strong>定义1.2.4</strong> (1)对于随机向量<span class="arithmatex">\(\symbfit{X}=(X_1,X_2,...X_n)^\mathrm{T}\)</span>，</p>
+<div class="arithmatex">\[\begin{align*}
+        \symbfit{\Sigma}&amp;=D(\symbfit{X})=\mathbb{E}[(\symbfit{X}-\mathbb{E}[\symbfit{X}])(\symbfit{X}-\mathbb{E}[\symbfit{X}])^\mathrm{T}]\\
+        &amp;=\left(\begin{array}{cccc}
+            D(X_1) &amp; \mathrm{cov}(X_1,X_2) &amp; \ldots &amp; \mathrm{cov}(X_1,X_n)\\
+            \mathrm{cov}(X_2,X_1) &amp; D(X_2) &amp; \ldots &amp; \mathrm{cov}(X_2,X_n)\\
+            \vdots &amp; \vdots &amp; \, &amp; \vdots\\
+            \mathrm{cov}(X_n,X_1) &amp; \mathrm{cov}(X_n,X_2) &amp; \ldots &amp; D(X_n)
+        \end{array}\right)\\
+        &amp;=(\sigma_{ij})_{n\times n}
+\end{align*}\]</div>
+<p>为<span class="arithmatex">\(n\)</span>维随机向量<span class="arithmatex">\(\symbfit{X}\)</span>的<strong>协方差矩阵</strong>，<span class="arithmatex">\(|\symbfit{\Sigma}|\)</span>为<span class="arithmatex">\(\symbfit{X}\)</span>的<strong>广义方差</strong>.</p>
+<p>(2)对于随机向量<span class="arithmatex">\(\symbfit{X}=(X_1,X_2,...X_m)^\mathrm{T}\)</span>和<span class="arithmatex">\(\symbfit{Y}=(Y_1,Y_2,...Y_n)^\mathrm{T}\)</span>，它们之间的协方差矩阵为</p>
+<div class="arithmatex">\[\symbfit{\Sigma}_{m\times n}=\mathbb{E}[(\symbfit{X}-\mathbb{E}[\symbfit{X}])(\symbfit{Y}-\mathbb{E}[\symbfit{Y}])^\mathrm{T}]=\mathrm{cov}(\symbfit{X},\symbfit{Y})=(\mathrm{cov}(X_i,Y_j)), i=1,2,...,m; j=1,2,...,n.\]</div>
+<p>若<span class="arithmatex">\(\mathrm{cov}(\symbfit{X},\symbfit{Y})=\textbf{0}\)</span>，则称<span class="arithmatex">\(\symbfit{X}\)</span>和<span class="arithmatex">\(\symbfit{Y}\)</span>不相关.</p>
+<p><strong>推论1.2.2</strong> 当<span class="arithmatex">\(\symbfit{A}\)</span>，<span class="arithmatex">\(\symbfit{B}\)</span>为常数矩阵时，由定义1.2.4可推出如下性质：</p>
+<p>(1)<span class="arithmatex">\(D(\symbfit{AX})=\symbfit{A}D(\symbfit{X})\symbfit{A}^\mathrm{T}=\symbfit{A}\symbfit{\Sigma}\symbfit{A}^\mathrm{T}\)</span></p>
+<p>(2)<span class="arithmatex">\(\mathrm{cov}(\symbfit{AX},\symbfit{BY})=\symbfit{A}\mathrm{cov}(\symbfit{X},\symbfit{Y})\symbfit{B}^\mathrm{T}\)</span></p>
+<p>证明：</p>
+<div class="arithmatex">\[D(\symbfit{AX})=\mathbb{E}[(\symbfit{AX}-\mathbb{E}[\symbfit{AX}])(\symbfit{AX}-\mathbb{E}[\symbfit{AX}])^\mathrm{T}]=\mathbb{E}[\symbfit{A}(\symbfit{X}-\mathbb{E}[\symbfit{X}])(\symbfit{X}-\mathbb{E}[\symbfit{X}])^\mathrm{T}\symbfit{A}^\mathrm{T}]=\symbfit{A}D(\symbfit{X})\symbfit{A}^\mathrm{T}\]</div>
+<div class="arithmatex">\[\begin{align*}\mathrm{cov}(\symbfit{AX},\symbfit{BY})&amp;=\mathbb{E}[(\symbfit{AX}-\mathbb{E}[\symbfit{AX}])(\symbfit{BY}-\mathbb{E}[\symbfit{BY}])^\mathrm{T}]=\mathbb{E}[\symbfit{A}(\symbfit{X}-\mathbb{E}[\symbfit{X}])(\symbfit{Y}-\mathbb{E}[\symbfit{Y}])^\mathrm{T}\symbfit{B}^\mathrm{T}]\\
+        &amp;=\symbfit{A}\mathrm{cov}(\symbfit{X},\symbfit{Y})\symbfit{B}^\mathrm{T}
+    \end{align*}\]</div>
+<p><strong>定义1.2.5</strong> 若随机向量<span class="arithmatex">\(\symbfit{X}=(X_1,X_2,...X_n)^\mathrm{T}\)</span>的协方差矩阵存在，且每个分量的方差大于零，则</p>
+<div class="arithmatex">\[\symbfit{R}=(\mathrm{corr}(X_i,Y_j))=(r_{ij})_{n\times n}\]</div>
+<p>为<span class="arithmatex">\(\symbfit{X}\)</span>的<strong>相关矩阵</strong>，其中</p>
+<div class="arithmatex">\[r_{ij}=\frac{\mathrm{cov}(X_i,Y_j)}{\sqrt{\vphantom{D(X_j)}D(X_i)}\sqrt{\vphantom{D(X_i)}D(X_j)}}, i,j=1,2,...,n\]</div>
+<h3 id="122">1.2.2 多元正态分布</h3>
+<p><strong>定义1.2.6</strong>     若随机向量<span class="arithmatex">\(\symbfit{X}=(X_1,X_2,...X_p)^\mathrm{T}\)</span>的概率密度函数为</p>
+<div class="arithmatex">\[f(x_1,x_2,...x_n)=\frac{1}{(2\pi)^{\frac{p}{2}}|\symbfit{\Sigma}|^{\frac{1}{2}}}\mathrm{exp}\left\{-\frac{1}{2}(\symbfit{x-\mu})^\mathrm{T}\symbfit{\Sigma}^{-1}(\symbfit{x-\mu})\right\}, \symbfit{\Sigma}&gt;\textbf{0}\]</div>
+<p>则称<span class="arithmatex">\(\symbfit{X}=(X_1,X_2,...X_p)^\mathrm{T}\)</span>服从<span class="arithmatex">\(p\)</span>元正态分布，也称<span class="arithmatex">\(\symbfit{X}\)</span>为<span class="arithmatex">\(p\)</span>元正态变量，记为：</p>
+<div class="arithmatex">\[\symbfit{X}\sim N_p(\symbfit{\mu},\symbfit{\Sigma})\]</div>
+<p>&emsp;&emsp;当<span class="arithmatex">\(p=2\)</span>时，可以得到二元正态分布的概率密度函数.</p>
+<p>&emsp;&emsp;设<span class="arithmatex">\(\symbfit{X}=(X_1,X_2)^\mathrm{T}\)</span>服从二元正态分布，则</p>
+<div class="arithmatex">\[\symbfit{\Sigma}=\left(\begin{array}{cccc}
+    \sigma_1^2 &amp; \sigma_1\sigma_2r\\
+    \sigma_2\sigma_1r &amp; \sigma_2^2
+\end{array}\right)\]</div>
+<p>则</p>
+<div class="arithmatex">\[|\symbfit{\Sigma}|=\sigma_1^2\sigma_2^2(1-r^2)\]</div>
+<div class="arithmatex">\[\symbfit{\Sigma}^{-1}=\frac{1}{\sigma_1^2\sigma_2^2(1-r^2)}\left(\begin{array}{cccc}
+    \sigma_2^2 &amp; -\sigma_1\sigma_2r\\
+    -\sigma_2\sigma_1r &amp; \sigma_1^2
+\end{array}\right)\]</div>
+<p>则二元正态变量<span class="arithmatex">\(\symbfit{X}\)</span>的概率密度函数为</p>
+<div class="arithmatex">\[f(x_1,x_2)=\frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-r^2}}\mathrm{exp}\left\{-\frac{1}{2(1-r^2)}\left[\frac{(x_1-\mu_1)^2}{\sigma_1^2}-2r\frac{(x_1-\mu_1)(x_2-\mu_2)}{\sigma_1\sigma_2}+\frac{(x_2-\mu_2)^2}{\sigma_2^2}\right]\right\}\]</div>
+<p>当<span class="arithmatex">\(r=0\)</span>时，</p>
+<div class="arithmatex">\[\begin{align*}
+    f(x_1,x_2)&amp;=\frac{1}{2\pi\sigma_1\sigma_2}\mathrm{exp}\left\{-\frac{1}{2}\left[\frac{(x_1-\mu_1)^2}{\sigma_1^2}+\frac{(x_2-\mu_2)^2}{\sigma_2^2}\right]\right\}\\
+    &amp;=\frac{1}{\sqrt{2\pi}\sigma_1}\mathrm{exp}\left[-\frac{(x_1-\mu_1)^2}{2\sigma_1^2}\right]\frac{1}{\sqrt{2\pi}\sigma_2}\mathrm{exp}\left[-\frac{(x_2-\mu_2)^2}{2\sigma_2^2}\right]\\
+    &amp;=f(x_1)f(x_2)
+\end{align*}\]</div>
+<p>此时<span class="arithmatex">\(X_1\)</span>，<span class="arithmatex">\(X_2\)</span>相互独立.</p>
+<p><strong>推论1.2.3</strong> （多元正态分布的性质）设<span class="arithmatex">\(\symbfit{X}\sim N_p(\symbfit{\mu},\symbfit{\Sigma})\)</span>，</p>
+<p>(1)<span class="arithmatex">\(\mathbb{E}[\symbfit{X}]=\symbfit{\mu},D(\symbfit{X})=\symbfit{\Sigma}\)</span>；</p>
+<p>(2)设<span class="arithmatex">\(m\)</span>维随机向量<span class="arithmatex">\(\symbfit{Z}_{m\times1}=\symbfit{AX}+\symbfit{b}\)</span>，其中<span class="arithmatex">\(\symbfit{A}_{m\times p}\)</span>为常数矩阵，<span class="arithmatex">\(\symbfit{b}\)</span>为<span class="arithmatex">\(m\)</span>维常向量，则<span class="arithmatex">\(\symbfit{Z}\sim N_m(\symbfit{A\mu}+\symbfit{b},\symbfit{A\Sigma A}^\mathrm{T})\)</span>.</p>
+<h3 id="123-chi2">1.2.3 <span class="arithmatex">\(\chi^2\)</span>分布</h3>
+<p><strong>定义1.2.7</strong> 当<span class="arithmatex">\(\symbfit{X}\sim N_n(\textbf{0},\symbfit{I}_n)\)</span>时，<span class="arithmatex">\(\symbfit{X}^\mathrm{T}\symbfit{X}\sim \chi^2(n)\)</span>.</p>
+<p><strong>推论1.2.4</strong> 若<span class="arithmatex">\(\symbfit{A}_{n\times n}\)</span>为对称幂等矩阵，<span class="arithmatex">\(r(\symbfit{A})=r\)</span>，当<span class="arithmatex">\(\symbfit{X}\sim N_n(\textbf{0},\symbfit{I}_n)\)</span>时，<span class="arithmatex">\(\symbfit{X}^\mathrm{T}\symbfit{AX}\sim \chi^2(r)\)</span>.</p>
+<p>证明：因为<span class="arithmatex">\(\symbfit{A}\)</span>为对称幂等矩阵，则一定存在可逆矩阵<span class="arithmatex">\(\symbfit{P}_{n\times n}\)</span>，使得</p>
+<div class="arithmatex">\[\symbfit{A}=\symbfit{P}^\mathrm{T}\left(\begin{array}{cccc}
+        \symbfit{I}_r &amp; \symbfit{O}\\
+        \symbfit{O} &amp; \symbfit{O}
+    \end{array}\right)\symbfit{P}\]</div>
+<p>令<span class="arithmatex">\(\symbfit{Y}=\symbfit{PX}\)</span>，则</p>
+<div class="arithmatex">\[\symbfit{X}^\mathrm{T}\symbfit{AX}=\symbfit{X}^\mathrm{T}\symbfit{P}^\mathrm{T}\left(\begin{array}{cccc}
+        \symbfit{I}_r &amp; \symbfit{O}\\
+        \symbfit{O} &amp; \symbfit{O}
+    \end{array}\right)\symbfit{PX}=\symbfit{Y}^\mathrm{T}\left(\begin{array}{cccc}
+        \symbfit{I}_r &amp; \symbfit{O}\\
+        \symbfit{O} &amp; \symbfit{O}
+    \end{array}\right)\symbfit{Y}\sim \chi^2(r).\]</div>
+<p><strong>推论1.2.5</strong> 当<span class="arithmatex">\(\symbfit{X}\sim N_n(\symbfit{\mu},\symbfit{\Sigma})\)</span>时，<span class="arithmatex">\((\symbfit{X-\mu})^\mathrm{T}\symbfit{\Sigma}^{-1}(\symbfit{X-\mu})\sim \chi^2(n)\)</span>.</p>
+<h2 id="13">1.3 条件期望</h2>
+<h3 id="131">1.3.1 条件期望和条件期望误差</h3>
+<p><strong>定义1.3.1</strong> (1)设<span class="arithmatex">\(X\)</span>和<span class="arithmatex">\(Y\)</span>的联合分布为离散分布，对于<span class="arithmatex">\(P\{Y=y\}&gt;0\)</span>的<span class="arithmatex">\(y\)</span>值，<span class="arithmatex">\(X\)</span>在给定<span class="arithmatex">\(Y=y\)</span>之下的条件期望为</p>
+<div class="arithmatex">\[\mathbb{E}[X|Y=y]=\sum_{x}xP\{X=x|Y=y\}=\sum_{x}x\frac{P\{X=x,Y=y\}}{P\{Y=y\}}\]</div>
+<p>(2)设<span class="arithmatex">\(X\)</span>和<span class="arithmatex">\(Y\)</span>有连续型联合分布，当<span class="arithmatex">\(f_Y(y)&gt;0\)</span>时，<span class="arithmatex">\(X\)</span>在给定<span class="arithmatex">\(Y=y\)</span>之下的条件期望为</p>
+<div class="arithmatex">\[\mathbb{E}[X|Y=y]=\int_{-\infty}^{+\infty}xf_{X|Y}(x|y)\mathrm{d}x=\int_{-\infty}^{+\infty}x\frac{f_{X,Y}(x,y)}{f_Y(y)}\mathrm{d}x\]</div>
+<p>&emsp;&emsp;给定一组随机变量<span class="arithmatex">\(Y_i(i=1,2,...,n)\)</span>，当<span class="arithmatex">\(Y_i\)</span>取遍所有的可能值后，得到的<span class="arithmatex">\(X_i\)</span>的期望值便可以看成<span class="arithmatex">\(X_i\)</span>关于<span class="arithmatex">\(Y_i\)</span>的函数，此时称<span class="arithmatex">\(\mathbb{E}[X_i|Y_i]\)</span>为<span class="arithmatex">\(X_i\)</span>关于<span class="arithmatex">\(Y_i\)</span>的<strong>条件期望函数</strong>(conditional expectation function，简称CEF).</p>
+<p>&emsp;&emsp;类似地，可以定义条件方差：</p>
+<div class="arithmatex">\[\mathrm{var}(X|Y=y)=\mathbb{E}[(X-\mathbb{E}[X|Y])^2|Y=y].\]</div>
+<p><strong>推论1.3.1</strong> </p>
+<div class="arithmatex">\[\mathbb{E}[g(X,Y)|Y=y]=
+    \begin{cases}
+        \sum_{x}g(x,y)f_{X|Y}(x|y), X\mbox{是离散型变量}\\
+        \int_{-\infty}^{+\infty}g(x,y)f_{X|Y}(x|y)\mathrm{d}x, X\mbox{是连续型变量}
+    \end{cases}\]</div>
+<p><strong>推论1.3.2</strong></p>
+<div class="arithmatex">\[\mathbb{E}[g(X)h(Y)|Y]=h(Y)\mathbb{E}[g(X)|Y]\]</div>
+<p>证明： 考虑连续情形：</p>
+<div class="arithmatex">\[\begin{align*}
+        \mathbb{E}[g(X)h(Y)|Y=y]&amp;=\int_{-\infty}^{+\infty}g(x)h(y)f_{X|Y}(x|y)\mathrm{d}x\\
+        &amp;=h(y)\int_{-\infty}^{+\infty}g(x)f_{X|Y}(x|y)\mathrm{d}x\\
+        &amp;=h(y)\mathbb{E}[g(X)|Y=y].
+    \end{align*}\]</div>
+<p>&emsp;&emsp;因为<span class="arithmatex">\(\mathbb{E}[g(X)h(Y)|Y]\)</span>的每一个实现值<span class="arithmatex">\((\mathbb{E}[g(X)h(Y)|Y=y])\)</span>与<span class="arithmatex">\(h(Y)\mathbb{E}[g(X)|Y]\)</span>的每一个实现值<span class="arithmatex">\((h(y)\mathbb{E}[g(X)|Y=y])\)</span>总是相等的，所以有</p>
+<div class="arithmatex">\[\mathbb{E}[g(X)h(Y)|Y]=h(Y)   \mathbb{E}[g(X)|Y]\]</div>
+<p><strong>定理1.3.1</strong> （迭代期望法则）</p>
+<div class="arithmatex">\[\mathbb{E}[\mathbb{E}[X|Y]]=\mathbb{E}[X]\]</div>
+<p>证明：当<span class="arithmatex">\(X\)</span>和<span class="arithmatex">\(Y\)</span>均为离散型变量时，</p>
+<div class="arithmatex">\[\begin{align*}
+        \mathbb{E}[\mathbb{E}[X|Y]]&amp;=\sum_{y}\sum_{x}x\frac{P\{X=x,Y=y\}}{P\{Y=y\}}P\{Y=y\}
+        \\  &amp;=\sum_{y}\sum_{x}xP\{X=x,Y=y\}\\
+        &amp;=\sum_{x}x\sum_{y}P\{X=x,Y=y\}\\
+        &amp;=\sum_{x}xP\{X=x\}\\
+        &amp;=\mathbb{E}[X]
+    \end{align*}\]</div>
+<p>当<span class="arithmatex">\(X\)</span>和<span class="arithmatex">\(Y\)</span>均为连续型变量时，</p>
+<div class="arithmatex">\[\begin{align*}
+        \mathbb{E}[\mathbb{E}[X|Y]]&amp;=\int_{-\infty}^{+\infty}\left(\int_{-\infty}^{+\infty}x\frac{f_{X,Y}(x,y)}{f_Y(y)}\mathrm{d}x\right)f_Y(y)\mathrm{d}y
+        \\  &amp;=\int_{-\infty}^{+\infty}x\left(\int_{-\infty}^{+\infty}f_{X,Y}(x,y)\mathrm{d}y\right)\mathrm{d}x\\
+        &amp;=\int_{-\infty}^{+\infty}xf_X(x)\mathrm{d}x\\
+        &amp;=\mathbb{E}[X]
+    \end{align*}\]</div>
+<p><strong>定理1.3.2</strong> （全方差法则）</p>
+<div class="arithmatex">\[\mathrm{var}(X)=\mathrm{var}(\mathbb{E}[X|Y])+\mathbb{E}[\mathrm{var}(X|Y)]\]</div>
+<p>证明：注意到</p>
+<div class="arithmatex">\[\mathrm{var}(\mathbb{E}[X|Y])=\mathbb{E}[(\mathbb{E}[X|Y])^2]-(\mathbb{E}[\mathbb{E}[X|Y]])^2=\mathbb{E}[(\mathbb{E}[X|Y])^2]-(\mathbb{E}[X])^2\]</div>
+<div class="arithmatex">\[\mathbb{E}[\mathrm{var}(X|Y)]=\mathbb{E}[\mathbb{E}[X^2|Y]-(\mathbb{E}[X|Y])^2]=\mathbb{E}[X^2]-\mathbb{E}[(\mathbb{E}[X|Y])^2]\]</div>
+<p>因此有</p>
+<div class="arithmatex">\[\mathrm{var}(\mathbb{E}[X|Y])+\mathbb{E}[\mathrm{var}(X|Y)]=-(\mathbb{E}[X])^2+\mathbb{E}[X^2]=\mathrm{var}(X)\]</div>
+<p><strong>定义1.3.2</strong>     定义</p>
+<div class="arithmatex">\[e=X-\mathbb{E}[X|Y]\]</div>
+<p>为<strong>条件期望误差</strong>(CEF error).</p>
+<p>这里，<span class="arithmatex">\(e\)</span>是由<span class="arithmatex">\((X,Y)\)</span>的联合分布决定的随机变量.同时，上式可以看作<span class="arithmatex">\(X\)</span>的条件期望的分解，即</p>
+<div class="arithmatex">\[X=\mathbb{E}[X|Y]+e.\]</div>
+<p><strong>推论1.3.3</strong> (1)<span class="arithmatex">\(\mathbb{E}[e|Y]=\mathbb{E}[e]=0\)</span></p>
+<p>(2)<span class="arithmatex">\(\mathrm{cov}(e,g(Y))=\mathbb{E}[e g(Y)]=\mathrm{cov}(e,\mathbb{E}[X|Y])=0\)</span></p>
+<p>(3)<span class="arithmatex">\(\mathrm{var}(e)=\mathbb{E}[\mathrm{var}(X|Y)]\)</span></p>
+<p>证明：(1)<span class="arithmatex">\(\mathbb{E}[e|Y]=\mathbb{E}[X-\mathbb{E}[X|Y]|Y]=\mathbb{E}[X|Y]-\mathbb{E}[X|Y]=0.\)</span> <span class="arithmatex">\(\mathbb{E}[e]=\mathbb{E}[\mathbb{E}[e|Y]]=0.\)</span></p>
+<p>(2)<span class="arithmatex">\(\mathrm{cov}(e,g(Y))=\mathbb{E}[e g(Y)]=\mathbb{E}[\mathbb{E}[e g(Y)]|Y]=\mathbb{E}[g(Y)\mathbb{E}[e]|Y]=0.\)</span></p>
+<p>因为<span class="arithmatex">\(\mathbb{E}[X|Y]\)</span>是关于<span class="arithmatex">\(Y\)</span>的一个函数，满足<span class="arithmatex">\(g(Y)\)</span>的形式，则有<span class="arithmatex">\(\mathrm{cov}(e,\mathbb{E}[X|Y])=0.\)</span></p>
+<p>(3)<span class="arithmatex">\(\mathrm{var}(e)=\mathbb{E}[e^2]=\mathbb{E}[\mathbb{E}[e^2|Y]]=\mathbb{E}[\mathbb{E}[(X-\mathbb{E}[X|Y])^2|Y]]=\mathbb{E}[\mathrm{var}(X|Y)].\)</span></p>
+<p><strong>定理1.3.3</strong> （条件期望函数的预测性质）对于给定的<span class="arithmatex">\(X\)</span>，当<span class="arithmatex">\(\mathbb{E}[Y^2]\)</span>存在时，<span class="arithmatex">\(\mathbb{E}[Y|X]\)</span>是对<span class="arithmatex">\(Y\)</span>的最小均方误预测.</p>
+<p>证明：令<span class="arithmatex">\(g(X)\)</span>为任意一个对<span class="arithmatex">\(Y\)</span>的预测函数,则</p>
+<div class="arithmatex">\[\begin{align*}
+        \mathrm{mse}(g(X))&amp;=\mathbb{E}[(g(X)-Y)^2]\\
+        &amp;=\mathbb{E}[[g(X)-\mathbb{E}[Y|X]-e]^2]\\
+        &amp;=\mathbb{E}[[g(X)-\mathbb{E}[Y|X]]^2]+2\mathbb{E}[e[g(X)-\mathbb{E}[Y|X]]]+\mathbb{E}[e^2]\\
+        &amp;=\mathbb{E}[[g(X)-\mathbb{E}[Y|X]]^2]+\mathbb{E}[e^2]\\
+        &amp;\geq\mathbb{E}[e^2]
+    \end{align*}\]</div>
+<p>当且仅当<span class="arithmatex">\(g(X)=\mathbb{E}[Y|X]\)</span>时，“<span class="arithmatex">\(=\)</span>”成立. 因此有</p>
+<div class="arithmatex">\[\mathbb{E}[Y|X]=\arg\min\mathbb{E}[(g(X)-Y)^2]=\arg\min\mathrm{mse}(g(X)).\]</div>
+<h3 id="132">1.3.2 条件期望函数</h3>
+<p><strong>定义1.3.3</strong> 当条件期望函数<span class="arithmatex">\(m(x)=\mathbb{E}[Y|X=x]\)</span>满足</p>
+<div class="arithmatex">\[m(x)=\beta_0+\beta_1x_1+\beta_2x_2+\cdots+\beta_kx_k=x^\mathrm{T}\beta,\mbox{其中}x=\left(\begin{array}{c}
+        1\\
+        x_1\\
+        x_2\\
+        \vdots\\
+        x_k
+    \end{array}\right),\beta=\left(\begin{array}{c}
+        \beta_0\\
+        \beta_1\\
+        \beta_2\\
+        \vdots\\
+        \beta_k
+    \end{array}\right)\]</div>
+<p>时，则称<span class="arithmatex">\(m(x)\)</span>为线性条件期望函数（Linear CEF）.</p>
+<p>&emsp;&emsp;如果关于<span class="arithmatex">\(X\)</span>的条件期望函数是线性的，对<span class="arithmatex">\(Y\)</span>进行条件期望分解，可得</p>
+<div class="arithmatex">\[Y=X^\mathrm{T}\beta+e.\]</div>
+<p>&emsp;&emsp;现在，我们介绍Linear CEF的一个特例.</p>
+<p>&emsp;&emsp;若<span class="arithmatex">\(X\)</span>为分类数据，在进行预测时，我们需要对<span class="arithmatex">\(X\)</span>进行赋值，使<span class="arithmatex">\(X\)</span>成为<strong>虚拟变量</strong>（Dummy Variables）.这里，<span class="arithmatex">\(X\)</span>是离散型随机变量，如果对于<span class="arithmatex">\(X\)</span>所取的所有可能值，<span class="arithmatex">\(\beta\)</span>中均有相应的参数与其对应，我们称模型达到<strong>饱和</strong>.此时，可构造线性饱和虚拟变量模型，即</p>
+<div class="arithmatex">\[m(\tilde{X})=X^\mathrm{T}\beta+e\]</div>
+<p>其中，设<span class="arithmatex">\(\tilde{X}_i(i=1,2,\cdots,k)\)</span>有<span class="arithmatex">\(n_i\)</span>个取值，则虚拟随机变量有<span class="arithmatex">\(N=\prod_{i=1}^kn_i\)</span>个，<span class="arithmatex">\(X\)</span>是一个<span class="arithmatex">\(N\)</span>维向量.这里，<span class="arithmatex">\(Y=X^\mathrm{T}\beta+e\)</span>称为<strong>饱和虚拟变量回归模型</strong>.</p>
+<p>&emsp;&emsp;注意，无论<span class="arithmatex">\(Y\)</span>的分布如何，上述模型都能完美地拟合Linear CEF，证明极其复杂，这里不另加赘述.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; Jeffery Chung
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["toc.integrate"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+      
+        <script src="../assets/mathjax.js"></script>
+      
+    
+  </body>
+</html>
