@@ -136,7 +136,7 @@ $$\begin{align*}
 		&=(\sigma_{ij})_{n\times n}
 \end{align*}$$
 
-为$n$维随机向量$\symbfit{X}$的\textbf{协方差矩阵}，$|\symbfit{\Sigma}|$为$\symbfit{X}$的**广义方差**.
+为$n$维随机向量$\symbfit{X}$的**协方差矩阵**，$|\symbfit{\Sigma}|$为$\symbfit{X}$的**广义方差**.
 	
 (2)对于随机向量$\symbfit{X}=(X_1,X_2,...X_m)^\mathrm{T}$和$\symbfit{Y}=(Y_1,Y_2,...Y_n)^\mathrm{T}$，它们之间的协方差矩阵为
 
