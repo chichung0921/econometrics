@@ -1,0 +1,36 @@
+site_name: 计量经济学
+site_url: https://github.com/chichung0921/fdeconometrics.git
+
+theme:
+  name: material
+  features:
+    - toc.integrate
+
+copyright: Copyright &copy; Jeffery Chung
+
+plugins: []
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js
+  - assets/mathjax.js
+
+nav:
+  - 简介: index.md
+  - 1 概率论与数理统计基础: chap1.md
+  - 2 简单线性回归: chap2.md
+  - 3 多元线性回归: chap3.md
+  - 4 工具变量回归: chap4.md
+  - 5 面板数据回归: chap5.md
+  - 6 断点回归: chap6.md
+
+extra_css:
+  - assets/font.css
+ 
+  

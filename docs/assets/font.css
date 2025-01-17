@@ -1,0 +1,58 @@
+@font-face {
+    font-family: "苏泽立行楷";
+    src: url("../assets/HYSuZeLiXingKaiTruingJ-2.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Latin Modern Math";
+    src: url("../assets/latinmodern-math.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "TeX Gyre Pagella Math";
+    src: url("../assets/texgyrepagella-math.otf") format("truetype");
+}
+
+
+/* 1. 一级标题：本地字体 苏泽立行楷 */
+h1 {
+    font-family: "苏泽立行楷", serif;
+}
+
+/* 2. 二级标题：微软雅黑 */
+h2 {
+    font-family: "华文中宋", sans-serif;
+}
+
+/* 3. 三级标题：中文黑体，英文 Arial */
+h3 {
+    font-family: "Latin Modern Math", "SimHei", sans-serif;
+}
+
+/* 4. 四级标题：
+   - 中文：加粗宋体
+   - 英文：加粗 Times New Roman */
+h4 {
+    font-family: "Times New Roman", "SimSun", serif;
+    font-weight: bold;
+}
+
+/* 5. 正文：
+   - 中文：宋体
+   - 英文：Sitka */
+body, p, span {
+    font-family: "Latin Modern Math", "SimSun",serif;
+}
+
+/* 6. 正文加粗：
+   - 中文：黑体
+   - 英文：加粗 Sitka */
+strong, b {
+    font-family: Sitka Small, "SimHei", serif;
+    font-weight: normal;
+}
+
+.mjx-svg {
+    font-weight: lighter; /* 或 lighter */
+    font-family: "Times New Roman", serif; /* 替换为你喜欢的数学字体 */
+}
